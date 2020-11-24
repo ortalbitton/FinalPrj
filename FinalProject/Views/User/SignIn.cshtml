@@ -1,42 +1,36 @@
 ﻿@model FinalProject.Models.User
 
-@{
-    ViewData["Title"] = "SignIn";
-}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="~/css/SignIn.css" />
-</head>
 <body>
-    <form asp-action="SignIn">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="email" class="control-label"></label>
-            <input asp-for="email" class="uname" placeholder="Enter Username" />
+
+    <a asp-action="SignUp">SignUp</a>
+    <a asp-action="SignIn">SignIn</a>
+
+    <div class="container">
+        <form asp-action="SignIn">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <label asp-for="email"></label>
+            <input asp-for="email" placeholder="Enter Email" />
             <span asp-validation-for="email" class="text-danger"></span>
-        </div>
 
-        <div class="form-group">
-            <label asp-for="password" class="control-label"></label>
-            <input asp-for="password" type="password" class="psw" placeholder="Enter Password" />
+
+            <label asp-for="password"></label>
+            <input asp-for="password" type="password" placeholder="Enter Password" />
             <span asp-validation-for="password" class="text-danger"></span>
-        </div>
 
-        <div class="form-group">
-            <input type="submit" value="SignIn" class="btn btn-primary" />
-        </div>
+            <button class="SignInbtn" type="submit">SignIn</button>
 
-    </form>
+            @if (ViewBag.Fail)
+            {
+                <div>Login failed. Please try again.</div>
+            }
 
-    @*<div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
-    </div>*@
+        </form>
+    </div>
 
 </body>
-</html>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -19,9 +19,34 @@ namespace FinalProject.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public IActionResult SignIn()
+        // GET: Users/Create
+        public IActionResult SignUp()
         {
+            return View();
+        }
+
+        // POST: Users/Create
+        [HttpPost]
+        public IActionResult SignUp(User user)
+        {
+            try
+            {
+                _userService.createUser(user);
+
+                HttpContext.Session.SetString("Mail", user.email);
+
+                return RedirectToAction("Home", "Post" ,new { isAuthenticated = true, pageNumber = 1 });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult SignIn(bool isAuthenticated)
+        {
+            ViewBag.isAuthenticated = isAuthenticated;
             ViewBag.Fail = false;
             return View();
         }
@@ -29,11 +54,11 @@ namespace FinalProject.Controllers
         [HttpPost]
         public IActionResult SignIn(User user)
         {
-            //כשיש התאמה
-            if (_userService.signIn(user).ToList().Count > 0)
+         
+            if (_userService.getUser(user).ToList().Count > 0)
             {
                 HttpContext.Session.SetString("Mail", user.email);
-                return RedirectToAction("Index", "Post");
+                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber = 1 });
             }
 
 
@@ -41,5 +66,14 @@ namespace FinalProject.Controllers
 
             return View(user);
         }
+
+        [HttpGet]
+        public IActionResult SignOut(bool isAuthenticated)
+        {
+            isAuthenticated = false;
+            HttpContext.Session.SetString("Mail", "");
+            return RedirectToAction("SignIn", "User", isAuthenticated);
+        }
+
     }
 }
