@@ -8,8 +8,10 @@ namespace FinalProject.Controllers
 {
     public class SrtController : Controller
     {
-        public IActionResult CreateSRT()
+        public IActionResult CreateSRT(bool? isAuthenticated)
         {
+            ViewBag.isAuthenticated = isAuthenticated;
+
             return View();
         }
 
