@@ -32,7 +32,7 @@ namespace FinalProject.Controllers
             return View(_postService.getPostList().OrderByDescending(x => x.Id).ToPagedList(pageNumber ?? 1, pageSize));
         }
 
-        // GET: Posts/Create
+        /// GET: Posts/Create
         public IActionResult NewPost(int pageNumber)
         {
             ViewBag.pageNumber = pageNumber;
