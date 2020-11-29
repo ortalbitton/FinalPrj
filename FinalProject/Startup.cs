@@ -39,7 +39,8 @@ namespace FinalProject
             services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             services.AddSingleton<UserService>();
             services.AddSingleton<PostService>();
-            services.AddSingleton<CommentService>();       
+            services.AddSingleton<CommentService>();
+            services.AddSingleton<SrtService>();
 
             //
             services.AddSession();

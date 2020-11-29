@@ -29,7 +29,7 @@ namespace FinalProject.Controllers
         {
             ViewBag.isAuthenticated = isAuthenticated;
 
-            return View(_postService.getPostList().OrderBy(x => x.Id).ToPagedList(pageNumber ?? 1, pageSize));
+            return View(_postService.getPostList().OrderByDescending(x => x.Id).ToPagedList(pageNumber ?? 1, pageSize));
         }
 
         // GET: Posts/Create
@@ -45,10 +45,8 @@ namespace FinalProject.Controllers
         {
             try
             {
-                //הindex של רשימת הפוסטים מתחיל מ0 
-                int totalpost = _postService.getPostList().Count;
-                if (totalpost > pageSize-1)
-                    pageNumber = pageNumber + 1;
+
+                 pageNumber = 1;
 
                 _postService.createPost(post, HttpContext.Session.GetString("Mail"));
 
