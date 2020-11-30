@@ -1,0 +1,23 @@
+﻿@model FinalProject.Models.Post
+
+
+<body>
+
+    <form asp-action="NewPost">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="tweet-body">
+            <textarea asp-for="text" placeholder="Write your post here!" rows="4" cols="50" class="status"></textarea>
+            <span asp-validation-for="text" class="text-danger"></span>
+        </div>
+        <div class="container">
+            @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" inside a tag button*@
+            <button type="submit" class="button postbtn" asp-route-pageNumber="@ViewBag.pageNumber">Post</button>
+        </div>
+    </form>
+
+</body>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
