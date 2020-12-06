@@ -8,7 +8,7 @@
         @* Do not touch a tag input *@
         <input asp-for="postId.Id" value="@ViewBag.PostId" hidden class="form-control" />
 
-        <div class="tweet-body">
+        <div class="tweet">
             <textarea asp-for="text" placeholder="Write your comment here!" rows="4" cols="50" class="status"></textarea>
             <span asp-validation-for="text" class="text-danger"></span>
         </div>

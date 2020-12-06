@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\userFrames\**" />
+    <Content Remove="wwwroot\userFrames\**" />
+    <EmbeddedResource Remove="wwwroot\userFrames\**" />
+    <None Remove="wwwroot\userFrames\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Services\PostService.cs~RF46ca95d.TMP" />
   </ItemGroup>
 
@@ -16,11 +23,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
     <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="wwwroot\userFrames\" />
   </ItemGroup>
 
 </Project>

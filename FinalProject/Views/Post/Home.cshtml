@@ -13,7 +13,7 @@
     <div id="newPost"></div>
 
 
-
+    @{int numberbtn = 0;}
     @foreach (var item in Model)
     {
 
@@ -29,7 +29,12 @@
 
         @*event click to show the view of NewComment
         Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber inside a tag input*@
-        <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber />
+        <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
+
+        @*place to show the view of NewComment
+        Do not touch the variable id="NewComment" class="popup" inside a tag div*@
+        <div id="NewComment" class="tweet-body popup"></div>
+
     </div>
 
 
@@ -52,6 +57,7 @@
             }
         </div>
 
+        numberbtn++;
 
     }
 
@@ -86,14 +92,6 @@
             }
         </div>
     </div>
-
-
-
-    <form id="myform" asp-controller="Comment" asp-action="NewComment">
-        @*place to show the view of NewComment
-            Do not touch the variable id="NewComment" inside a tag div*@
-        <div id="NewComment"></div>
-    </form>
 
 </body>
 
