@@ -63,7 +63,7 @@
     .tweet-body .commentText {
         overflow: hidden;
         /* resize: none; */
-        /*margin-top: 40px;*/
+        margin-top: 40px;
         margin-left: 40px;
         height: 100px;
         border: 3px solid #4CAF50;
@@ -83,6 +83,17 @@
         .tweet-body .popup.open {
             display: block;
         }
+
+
+.postUserName {
+    position: absolute;
+    margin-left: 40px;
+}
+
+.commentUserName {
+    position: absolute;
+    margin-left: 17%;
+}
 
 
 

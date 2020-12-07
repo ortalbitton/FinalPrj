@@ -21,10 +21,10 @@
     <div class="tweet-body">
 
         @*user name of post*@
-        <label>@item.name</label>
+        <label class="postUserName">@item.name</label>
 
         @*post*@
-        <p class="postText">@item.text</p>
+        <textarea class="postText" readonly>@item.text</textarea>
 
 
         @*event click to show the view of NewComment
@@ -45,11 +45,11 @@
                 {
 
                     //user name of comment to user name of post
-                    <label>@comment.name to @item.name</label>
+                    <label class="commentUserName">@comment.name to @item.name</label>
 
 
                     //comment
-                    <p class="commentText">@comment.text</p>
+                    <textarea class="commentText" readonly>@comment.text</textarea>
 
 
                 }
