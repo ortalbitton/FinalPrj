@@ -79,10 +79,15 @@
         display: none;
     }
 
-
         .tweet-body .popup.open {
             display: block;
         }
+
+
+.comments.hide {
+    visibility: hidden;
+    height: 0px;
+}
 
 
 .postUserName {
@@ -93,7 +98,8 @@
 .commentUserName {
     position: absolute;
     margin-left: 17%;
-}
+}
+
 
 
 

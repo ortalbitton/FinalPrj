@@ -18,40 +18,41 @@
     {
 
 
-    <div class="tweet-body">
+        <div class="tweet-body">
 
-        @*user name of post*@
-        <label class="postUserName">@item.name</label>
+            @*user name of post*@
+            <label class="postUserName">@item.name</label>
 
-        @*post*@
-        <textarea class="postText" readonly>@item.text</textarea>
-
-
-        @*event click to show the view of NewComment
-        Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber inside a tag input*@
-        <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
-
-        @*place to show the view of NewComment
-        Do not touch the variable id="NewComment" class="popup" inside a tag div*@
-        <div id="NewComment" class="tweet-body popup"></div>
-
-    </div>
+            @*post*@
+            <textarea class="postText" readonly>@item.text</textarea>
 
 
-        <div class="tweet-body comments">
+            @*event click to show the view of NewComment
+                Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
+            <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
+
+            @*place to show the view of NewComment
+                Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
+            <div id="NewComment" class="tweet-body popup"></div>
+
+        </div>
+
+        @*Do not touch the variable class="comments" inside a tag div*@
+        <div class="comments">
             @if (item.comList != null)
             {
                 @foreach (var comment in item.comList)
                 {
 
-                    //user name of comment to user name of post
-                    <label class="commentUserName">@comment.name to @item.name</label>
+                    <div class="tweet-body">
+                        @*//user name of comment to user name of post*@
+                        <label class="commentUserName">@comment.name to @item.name</label>
 
 
-                    //comment
-                    <textarea class="commentText" readonly>@comment.text</textarea>
+                        @*//comment*@
+                        <textarea class="commentText" readonly>@comment.text</textarea>
 
-
+                    </div>
                 }
 
             }

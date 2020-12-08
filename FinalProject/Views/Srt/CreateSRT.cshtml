@@ -3,9 +3,19 @@
     ViewData["Title"] = "CreateSRT";
 }
 
-<h1>CreateSRT</h1>
 
 <form asp-action="CreateSRT" enctype="multipart/form-data">
-    <input type="file" name="VideoFile"/>
-    <button type="submit">Convert</button>
+    <label class="textarea">
+        <label id="namefile">Please choose a video</label>
+    </label>
+    <label for="VideoFile" class="btnSRT btnSRT1">Choose video</label>
+
+    <label id="sizelimit">the file is too large</label>
+
+    @*Do not touch a tag input because it's used to transfer VideoFile to SrtController *@
+    <input id="VideoFile" name="VideoFile" type="file" class="inputfile" />
+
+    <button type="submit" class="btnSRT btnSRT1" style="position:relative">Convert</button>
 </form>
+
+
