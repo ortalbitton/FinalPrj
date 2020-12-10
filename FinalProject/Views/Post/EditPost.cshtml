@@ -1,0 +1,36 @@
+﻿@model FinalProject.Models.Post
+
+
+<body>
+    <div id="tweet-body">
+        <form asp-action="EditPost">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @* Do not touch a tag input *@
+            <input asp-for="Id" value="@ViewBag.PostId" hidden class="form-control" />
+
+            @*user name of post*@
+            <label class="postUserName">@ViewBag.name</label>
+
+            @*post*@
+            <textarea class="postText" asp-for="text"></textarea>
+
+            <div class="container">
+                @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" inside a tag button*@
+                <button type="submit" class="editbutton" asp-route-pageNumber="@ViewBag.pageNumber">Edit</button>
+
+                @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" inside a tag a*@
+                <button asp-action="Home" class="editbutton"
+                        asp-route-pageNumber="@ViewBag.pageNumber" asp-route-isAuthenticated="true">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

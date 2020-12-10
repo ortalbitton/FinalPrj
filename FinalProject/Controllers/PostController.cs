@@ -58,5 +58,41 @@ namespace FinalProject.Controllers
                 return View();
             }
         }
+
+        // GET: Posts/Edit/5
+        public IActionResult EditPost(string PostId, int pageNumber)
+        {
+            ViewBag.name = _postService.getPostById(PostId).name;
+            ViewBag.pageNumber = pageNumber;
+            ViewData["PostId"] = PostId;
+            return View(_postService.getPostById(PostId));
+        }
+
+        // POST: Posts/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPost(Post postIn, int pageNumber)
+        {
+            try
+            {
+                var post = _postService.getPostById(postIn.Id);
+
+                if (post == null)
+                {
+                    return NotFound();
+                }
+
+                post.text = postIn.text;
+
+                _postService.updatePost(post.Id, post);
+                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

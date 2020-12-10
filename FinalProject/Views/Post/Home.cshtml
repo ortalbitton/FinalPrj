@@ -4,94 +4,109 @@
 
 <body>
 
-    @* event click to show the view of NewPost
+    <div class="container">
+
+        @* event click to show the view of NewPost
         Do not touch the variable id="newPostbtn" and pageNumber=@Model.PageNumber inside a tag input  *@
-    <input type="submit" class="button button1" id="newPostbtn" value="NewPost" pageNumber=@Model.PageNumber />
+        <input type="submit" class="button button1" id="newPostbtn" value="NewPost" pageNumber=@Model.PageNumber />
 
-    @* place to show the view of NewPost
+        @* place to show the view of NewPost
         Do not touch the variable id="newPost" inside a tag div  *@
-    <div id="newPost"></div>
+        <div id="newPost"></div>
 
 
-    @{int numberbtn = 0;}
-    @foreach (var item in Model)
-    {
+        @{int numberbtn = 0;}
+        @foreach (var item in Model)
+        {
 
 
-        <div class="tweet-body">
+            <div id="tweet-body" class="post">
 
-            @*user name of post*@
-            <label class="postUserName">@item.name</label>
+                @*user name of post*@
+                <label class="postUserName">@item.name</label>
 
-            @*post*@
-            <textarea class="postText" readonly>@item.text</textarea>
+                @*post*@
+                <textarea class="postText" readonly>@item.text</textarea>
 
 
-            @*event click to show the view of NewComment
+                @*event click to show the view of NewComment
                 Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
-            <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
+                <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
 
-            @*place to show the view of NewComment
+                @*event click to show the view of EditPost
+                Do not touch the variable id="edit" and PostId="@item.Id"*@
+                <input type="submit" class="button button2" id="edit" PostId="@item.Id" value="Edit" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
+
+
+
+                @*place to show the view of NewComment
                 Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
-            <div id="NewComment" class="tweet-body popup"></div>
+                <div id="NewComment" class="popup"></div>
 
-        </div>
+            </div>
 
-        @*Do not touch the variable class="comments" inside a tag div*@
-        <div class="comments">
-            @if (item.comList != null)
-            {
-                @foreach (var comment in item.comList)
+            @*place to show the view of EditPost
+            Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
+            <div id="EditPost" class="popup"></div>
+
+
+            @*Do not touch the variable class="comments" inside a tag div*@
+            <div class="comments">
+                @if (item.comList != null)
                 {
+                    @foreach (var comment in item.comList)
+                    {
 
-                    <div class="tweet-body">
-                        @*//user name of comment to user name of post*@
-                        <label class="commentUserName">@comment.name to @item.name</label>
+                        <div id="tweet-body">
+                            @*//user name of comment to user name of post*@
+                            <label class="commentUserName">@comment.name to @item.name</label>
 
 
-                        @*//comment*@
-                        <textarea class="commentText" readonly>@comment.text</textarea>
+                            @*//comment*@
+                            <textarea class="commentText" readonly>@comment.text</textarea>
 
-                    </div>
+                        </div>
+                    }
+
                 }
+            </div>
 
-            }
-        </div>
+            numberbtn++;
 
-        numberbtn++;
+        }
 
-    }
+        <div id="container" style="margin-left: 20px">
+            <p></p>
+            <p></p>
+            <div class="pagination" style="margin-left: 400px">
 
-    <div id="container" style="margin-left: 20px">
-        <p></p>
-        <p></p>
-        <div class="pagination" style="margin-left: 400px">
-
-            @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
+                @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
                 asp-route-isAuthenticated="true" inside a tag a*@
 
-            @if (Model.PageNumber > 1)
-            {
-                <a asp-action="Home"
-                   asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-isAuthenticated="true">
-                    Previous
-                </a>
-            }
+                @if (Model.PageNumber > 1)
+                {
+                    <a asp-action="Home"
+                       asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-isAuthenticated="true">
+                        Previous
+                    </a>
+                }
 
-            @if (Model.PageCount != 0)
-            {
-                <label>  Page @Model.PageNumber of @Model.PageCount </label>
-            }
+                @if (Model.PageCount != 0)
+                {
+                    <label>  Page @Model.PageNumber of @Model.PageCount </label>
+                }
 
 
-            @if (Model.PageNumber < Model.PageCount)
-            {
-                <a asp-action="Home"
-                   asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-isAuthenticated="true">
-                    Next
-                </a>
-            }
+                @if (Model.PageNumber < Model.PageCount)
+                {
+                    <a asp-action="Home"
+                       asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-isAuthenticated="true">
+                        Next
+                    </a>
+                }
+            </div>
         </div>
+
     </div>
 
 </body>

@@ -56,5 +56,17 @@ namespace FinalProject.Services
 
             _posts.ReplaceOne(p => p.Id == postId, postIn);
         }
+
+
+        public Post getPostById(string id)
+        {
+            return _posts.Find(post => post.Id == id).SingleOrDefault();
+        }
+
+        public void updatePost(string id, Post post)
+        {
+            _posts.ReplaceOne(p => p.Id == id, post);
+        }
+
     }
 }

@@ -40,12 +40,12 @@
         color: white;
     }
 
-.tweet-body {
+#tweet-body {
     width: 82%;
     margin-left: 60px;
 }
 
-    .tweet-body .postText {
+    #tweet-body .postText {
         overflow: hidden;
         /* resize: none; */
         margin-top: 40px;
@@ -60,7 +60,7 @@
         width: 50%;
     }
 
-    .tweet-body .commentText {
+    #tweet-body .commentText {
         overflow: hidden;
         /* resize: none; */
         margin-top: 40px;
@@ -75,16 +75,21 @@
         margin-left: 30%;
     }
 
-    .tweet-body .popup {
-        display: none;
-    }
+.popup {
+    display: none;
+}
 
-        .tweet-body .popup.open {
-            display: block;
-        }
+    .popup.open {
+        display: block;
+    }
 
 
 .comments.hide {
+    visibility: hidden;
+    height: 0px;
+}
+
+.post.hide {
     visibility: hidden;
     height: 0px;
 }
@@ -99,7 +104,3 @@
     position: absolute;
     margin-left: 17%;
 }
-
-
-
-

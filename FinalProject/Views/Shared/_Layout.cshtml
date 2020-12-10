@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/css/newPost.css" />
     <link rel="stylesheet" href="~/css/newComment.css" />
     <link rel="stylesheet" href="~/css/CreateSRT.css" />
+    <link rel="stylesheet" href="~/css/editPost.css" />
 </head>
 <body>
     <header>
@@ -39,12 +40,12 @@
 
         }
     </header>
-    <div class="container">
-        @*<partial name="_CookieConsentPartial" />*@
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -75,6 +76,7 @@
     <script src="~/js/newPost.js"></script>
     <script src="~/js/newComment.js"></script>
     <script src="~/js/CreateSRT.js"></script>
+    <script src="~/js/editPost.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
