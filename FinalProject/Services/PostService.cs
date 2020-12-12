@@ -68,5 +68,11 @@ namespace FinalProject.Services
             _posts.ReplaceOne(p => p.Id == id, post);
         }
 
+        public void removePost(string id)
+        {
+            _posts.DeleteOne(p => p.Id == id);
+        }
+
+
     }
 }

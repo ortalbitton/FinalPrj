@@ -40,6 +40,16 @@ namespace FinalProject.Services
 
         }
 
+        public Comment getCommentById(string id)
+        {
+            return _comments.Find(c => c.Id == id).SingleOrDefault();
+        }
 
+        public void removeComment(string id)
+        {
+            _comments.DeleteOne(c => c.Id == id);
+        }
+
+    
     }
 }

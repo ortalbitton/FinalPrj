@@ -1,26 +1,30 @@
-﻿@*Do not touch the model and using*@  
+﻿@*Do not touch the model and using*@
 @using PagedList;
 @model IPagedList<FinalProject.Models.Post>
 
 <body>
 
-    <div class="container">
+    <div id="newP" class="container">
 
         @* event click to show the view of NewPost
-        Do not touch the variable id="newPostbtn" and pageNumber=@Model.PageNumber inside a tag input  *@
+            Do not touch the variable id="newPostbtn" and pageNumber=@Model.PageNumber inside a tag input  *@
         <input type="submit" class="button button1" id="newPostbtn" value="NewPost" pageNumber=@Model.PageNumber />
 
         @* place to show the view of NewPost
-        Do not touch the variable id="newPost" inside a tag div  *@
-        <div id="newPost"></div>
+            Do not touch the variable id="newPost" inside a tag div  *@
+        <div id="newPost" class="popup"></div>
+    </div>
 
+    @*Do not touch the variable id="PostsAndComments" inside a tag div  *@
+    <div id="PostsAndComments" class="container">
 
-        @{int numberbtn = 0;}
+        @{int numberbtn = 0, numberbtnC = 0;}
         @foreach (var item in Model)
         {
 
-
+            @* Do not touch the variable class="post" inside a tag div *@
             <div id="tweet-body" class="post">
+
 
                 @*user name of post*@
                 <label class="postUserName">@item.name</label>
@@ -30,34 +34,33 @@
 
 
                 @*event click to show the view of NewComment
-                Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
+                    Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
                 <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
 
                 @*event click to show the view of EditPost
-                Do not touch the variable id="edit" and PostId="@item.Id"*@
+                    Do not touch the variable id="edit" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
                 <input type="submit" class="button button2" id="edit" PostId="@item.Id" value="Edit" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
 
-
-
-                @*place to show the view of NewComment
-                Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
-                <div id="NewComment" class="popup"></div>
+                @*event click to DeletePost
+                    Do not touch the variable id="delete" and PostId="@item.Id" and pageNumber=@Model.PageNumber and totalPages="@Model.PageCount" inside a tag input*@
+                <input type="submit" class="button button2" id="delete" PostId="@item.Id" value="Delete" totalPages="@Model.PageCount" pageNumber=@Model.PageNumber />
 
             </div>
 
             @*place to show the view of EditPost
-            Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
+                Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
             <div id="EditPost" class="popup"></div>
 
 
-            @*Do not touch the variable class="comments" inside a tag div*@
             <div class="comments">
                 @if (item.comList != null)
                 {
                     @foreach (var comment in item.comList)
                     {
 
-                        <div id="tweet-body">
+                        @*Do not touch the variable class="comment" inside a tag div*@
+                        <div id="tweet-body" class="comment">
+
                             @*//user name of comment to user name of post*@
                             <label class="commentUserName">@comment.name to @item.name</label>
 
@@ -65,11 +68,31 @@
                             @*//comment*@
                             <textarea class="commentText" readonly>@comment.text</textarea>
 
+                            @*event click to show the view of EditComment
+                                Do not touch the variable id="commentEdit" and CommentId="@comment.Id" and pageNumber=@Model.PageNumber and numberbtnC="@(numberbtnC)" inside a tag input*@
+                            <input type="submit" class="button button2" id="commentEdit" value="EditC" CommentId="@comment.Id" pageNumber=@Model.PageNumber numberbtnC="@(numberbtnC)" />
+
+                            @*event click to DeleteComment
+                                Do not touch the variable id="delete" and CommentId="@comment.Id" and pageNumber=@Model.PageNumber and totalPages="@Model.PageCount" inside a tag input*@
+                            <input type="submit" class="button button2" id="deleteC" CommentId="@comment.Id" value="DeleteC" totalPages="@Model.PageCount" pageNumber=@Model.PageNumber />
+
                         </div>
+
+                        @*place to show the view of EditComment
+                            Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
+                        <div id="EditComment" class="popup"></div>
+
+
+                        numberbtnC++;
                     }
 
                 }
             </div>
+
+            @*place to show the view of NewComment
+                Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
+            <div id="NewComment" class="popup"></div>
+
 
             numberbtn++;
 
@@ -81,7 +104,7 @@
             <div class="pagination" style="margin-left: 400px">
 
                 @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
-                asp-route-isAuthenticated="true" inside a tag a*@
+                    asp-route-isAuthenticated="true" inside a tag a*@
 
                 @if (Model.PageNumber > 1)
                 {

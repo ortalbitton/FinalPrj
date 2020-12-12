@@ -32,14 +32,25 @@ namespace FinalProject.Controllers
             return View(_postService.getPostList().OrderByDescending(x => x.Id).ToPagedList(pageNumber ?? 1, pageSize));
         }
 
-        /// GET: Posts/Create
+        public IActionResult Refresh(int pageNumber,int totalPages)
+        {
+            int totalpostPerPage = _postService.getPostList().OrderByDescending(x => x.Id).ToPagedList(pageNumber, pageSize).Count;
+            int totalpost = _postService.getPostList().Count;
+
+            if (totalpostPerPage == 0 && totalPages!=1)
+                pageNumber = totalPages - 1;
+
+            return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
+        }
+
+        /// GET: Posts/NewPost
         public IActionResult NewPost(int pageNumber)
         {
             ViewBag.pageNumber = pageNumber;
             return View();
         }
 
-        // POST: Posts/Create
+        // POST: Posts/NewPost
         [HttpPost]
         public IActionResult NewPost(Post post, int pageNumber)
         {
@@ -59,7 +70,7 @@ namespace FinalProject.Controllers
             }
         }
 
-        // GET: Posts/Edit/5
+        // GET: Posts/EditPost/5
         public IActionResult EditPost(string PostId, int pageNumber)
         {
             ViewBag.name = _postService.getPostById(PostId).name;
@@ -68,7 +79,7 @@ namespace FinalProject.Controllers
             return View(_postService.getPostById(PostId));
         }
 
-        // POST: Posts/Edit/5
+        // POST: Posts/EditPost/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditPost(Post postIn, int pageNumber)
@@ -87,6 +98,21 @@ namespace FinalProject.Controllers
                 _postService.updatePost(post.Id, post);
                 return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
 
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Posts/DeletePost/5
+        public IActionResult DeletePost(string PostId, int pageNumber)
+        {
+            try
+            {
+                var post = _postService.getPostById(PostId);
+                _postService.removePost(post.Id);
+                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
             }
             catch
             {

@@ -1,17 +1,26 @@
-﻿$("#newPostbtn").click(function () {
+﻿
+$("#newPostbtn").click(function () {
 
-    $('.tweet-body').hide();
-    $('#container').hide();
+    $('#PostsAndComments').hide();
+    $("#newPost").addClass('open');
 
-    var pageNumber = $(this).attr("pageNumber")
 
     $.ajax({
-        url: "NewPost?pageNumber=" + pageNumber,
+        url: "NewPost",
         method: "get",
         success: function (respon) {
             $("#newPost").html(respon)
         }
     });
 
+});
+
+// hide view NewPost
+$(document).mouseup(function (e) {
+    var a = $("#newPost");
+    if (!a.is(e.target) && a.has(e.target).length == 0) {
+        $("#newPost").removeClass('open');
+        $('#PostsAndComments').show();
+    }
 });
 

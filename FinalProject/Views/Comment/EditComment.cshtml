@@ -1,5 +1,4 @@
-﻿@model FinalProject.Models.Post
-
+﻿@model FinalProject.Models.Comment
 
 <body>
     <div id="tweet-body">
@@ -7,17 +6,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @* Do not touch a tag input *@
-            <input asp-for="Id" value="@ViewBag.PostId" hidden class="form-control" />
+            <input asp-for="Id" value="@ViewBag.CommentId" hidden class="form-control" />
 
-            @*user name of post*@
-            <label class="postUserName">@ViewBag.name</label>
+            @*user name of comment*@
+            @*<label class="cUserName">@ViewBag.name</label>*@
 
-            @*post*@
-            <textarea class="postText" asp-for="text"></textarea>
+            @*comment*@
+            <textarea class="cText" asp-for="text"></textarea>
 
 
             @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" inside a tag button*@
-            <button type="submit" id="editbutton" asp-route-pageNumber="@ViewBag.pageNumber">Edit</button>
+            <button type="submit" id="editbuttonC" asp-route-pageNumber="@ViewBag.pageNumber">Edit</button>
 
             @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" and asp-route-isAuthenticated="true" inside a tag a*@
             <button asp-action="Home" id="editbutton"
@@ -33,4 +32,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

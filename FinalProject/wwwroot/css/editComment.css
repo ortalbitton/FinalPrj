@@ -1,5 +1,5 @@
 ﻿
-#editbutton {
+#editbuttonC {
     border: none;
     color: white;
     padding: 16px 32px;
@@ -25,22 +25,22 @@
     margin-left: 60px;
 }
 
-    #tweet-body .postText {
+    #tweet-body .cText {
         overflow: hidden;
         /* resize: none; */
         margin-top: 40px;
-        margin-left: 40px;
         height: 100px;
         border: 3px solid #4CAF50;
         border-radius: 4px;
-        padding: 100px;
+        /*padding: 100px;*/
         font-size: 16px;
         font-family: Arial;
-        /*position: absolute;*/
-        width: 50%;
+        width: 60%;
+        margin-left: 16%;
     }
 
-.postUserName {
+.cUserName {
     position: absolute;
-    margin-left: 40px;
+    margin-left: 11%;
 }
+
