@@ -13,29 +13,41 @@ for (var i = 0; i < allEdit.length; i++) {
 
         var numberbtn = $(this).attr("numberbtn")
 
-        allPosts[parseInt(numberbtn)].classList.add('hide');
+        var userNameofPost = $(this).attr("userNameofPost")
+        var userName = $(this).attr("userName")
 
-        var f = document.createElement("form");
-        f.setAttribute('action', "EditPost");
+        if (userNameofPost == userName) {
 
-        var form = f
-        var url = form.action;
+            allPosts[parseInt(numberbtn)].classList.add('hide');
 
-        var PostId = $(this).attr("PostId")
-        var pageNumber = parseInt($(this).attr("pageNumber").toString())
+            var f = document.createElement("form");
+            f.setAttribute('action', "EditPost");
 
-        allEditPosts[parseInt(numberbtn)].classList.add('open');
+            var form = f
+            var url = form.action;
 
-        $.ajax({
-            url: url + "?PostId=" + PostId + "&pageNumber=" + pageNumber,
-            method: "get",
-            success: function (respon) {
-                allEditPosts[numberbtn].innerHTML = respon;
-            }
+            var PostId = $(this).attr("PostId")
+            var pageNumber = parseInt($(this).attr("pageNumber").toString())
 
-        });
+            allEditPosts[parseInt(numberbtn)].classList.add('open');
 
-        numberComment = numberbtn;
+            $.ajax({
+                url: url + "?PostId=" + PostId + "&pageNumber=" + pageNumber,
+                method: "get",
+                success: function (respon) {
+                    allEditPosts[numberbtn].innerHTML = respon;
+                }
+
+            });
+
+            numberComment = numberbtn;
+        }
+        else {
+            $(this).prop('disabled', true);
+            $(this).css('pointer-events', 'none');
+            $(this).css('background-color', 'gainsboro');
+            $(this).val('no-edit');
+        }
     });
 }
 

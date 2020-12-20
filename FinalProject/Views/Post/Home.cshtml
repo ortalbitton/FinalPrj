@@ -7,8 +7,8 @@
     <div id="newP" class="container">
 
         @* event click to show the view of NewPost
-            Do not touch the variable id="newPostbtn" and pageNumber=@Model.PageNumber inside a tag input  *@
-        <input type="submit" class="button button1" id="newPostbtn" value="NewPost" pageNumber=@Model.PageNumber />
+            Do not touch the variable id="newPostbtn" inside a tag input  *@
+        <input type="submit" class="button button1" id="newPostbtn" value="NewPost" />
 
         @* place to show the view of NewPost
             Do not touch the variable id="newPost" inside a tag div  *@
@@ -38,12 +38,13 @@
                 <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
 
                 @*event click to show the view of EditPost
-                    Do not touch the variable id="edit" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
-                <input type="submit" class="button button2" id="edit" PostId="@item.Id" value="Edit" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
+                    Do not touch the variable id="edit" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" and userNameofPost="@item.name" and userName="@ViewBag.userName" inside a tag input*@
+                <input type="submit" class="button button2" id="edit" PostId="@item.Id" value="Edit" pageNumber=@Model.PageNumber userNameofPost="@item.name" userName="@ViewBag.userName" numberbtn="@(numberbtn)" />
 
                 @*event click to DeletePost
-                    Do not touch the variable id="delete" and PostId="@item.Id" and pageNumber=@Model.PageNumber and totalPages="@Model.PageCount" inside a tag input*@
-                <input type="submit" class="button button2" id="delete" PostId="@item.Id" value="Delete" totalPages="@Model.PageCount" pageNumber=@Model.PageNumber />
+                    Do not touch the variable id="delete" and PostId="@item.Id" and pageNumber=@Model.PageNumber and totalPages="@Model.PageCount" and userNameofPost="@item.name" and userName="@ViewBag.userName" inside a tag input*@
+                <input type="submit" class="button button2" id="delete" PostId="@item.Id" value="Delete" totalPages="@Model.PageCount" pageNumber=@Model.PageNumber userNameofPost="@item.name" userName="@ViewBag.userName" />
+
 
             </div>
 
@@ -69,12 +70,12 @@
                             <textarea class="commentText" readonly>@comment.text</textarea>
 
                             @*event click to show the view of EditComment
-                                Do not touch the variable id="commentEdit" and CommentId="@comment.Id" and pageNumber=@Model.PageNumber and numberbtnC="@(numberbtnC)" inside a tag input*@
-                            <input type="submit" class="button button2" id="commentEdit" value="EditC" CommentId="@comment.Id" pageNumber=@Model.PageNumber numberbtnC="@(numberbtnC)" />
+                                Do not touch the variable id="commentEdit" and CommentId="@comment.Id" and pageNumber=@Model.PageNumber and numberbtnC="@(numberbtnC)" and userNameofComment="@item.name" and userName="@ViewBag.userName" inside a tag input*@
+                            <input type="submit" class="button button2" id="commentEdit" value="EditC" CommentId="@comment.Id" pageNumber=@Model.PageNumber numberbtnC="@(numberbtnC)" userNameofComment="@comment.name" userName="@ViewBag.userName" />
 
                             @*event click to DeleteComment
-                                Do not touch the variable id="delete" and CommentId="@comment.Id" and pageNumber=@Model.PageNumber and totalPages="@Model.PageCount" inside a tag input*@
-                            <input type="submit" class="button button2" id="deleteC" CommentId="@comment.Id" value="DeleteC" totalPages="@Model.PageCount" pageNumber=@Model.PageNumber />
+                                Do not touch the variable id="delete" and CommentId="@comment.Id" and pageNumber=@Model.PageNumber and totalPages="@Model.PageCount" and userNameofComment="@item.name" and userName="@ViewBag.userName" inside a tag input*@
+                            <input type="submit" class="button button2" id="deleteC" CommentId="@comment.Id" value="DeleteC" totalPages="@Model.PageCount" pageNumber=@Model.PageNumber userNameofComment="@comment.name" userName="@ViewBag.userName" />
 
                         </div>
 

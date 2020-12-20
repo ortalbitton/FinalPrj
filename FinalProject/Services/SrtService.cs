@@ -9,16 +9,29 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text;
 using System.Diagnostics;
+using MongoDB.Bson;
+using Microsoft.AspNetCore.Http.Internal;
+using MongoDB.Driver.GridFS;
+using FinalProject.HelpClasses;
+using MongoDB.Driver;
+using FinalProject.Models;
 
 namespace FinalProject.Services
 {
     public class SrtService
     {
         private IHostingEnvironment _env;
+        private readonly IGridFSBucket bucket;
+        private readonly IMongoCollection<User> _users;
 
-        public SrtService(IHostingEnvironment env)
+        public SrtService(IHostingEnvironment env, IDatabaseSettings settings)
         {
             _env = env;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            bucket = new GridFSBucket(database);
+            _users = database.GetCollection<User>("users");
+
         }
 
 
@@ -107,5 +120,151 @@ namespace FinalProject.Services
                 Console.WriteLine(e.Message);
             }
         }
+
+        public string getDictionaryPath()
+        {
+            string path = _env.ContentRootPath + "/wwwroot/json/categorySRT.json";
+
+            return path;
+        }
+
+
+        public List<string> getCategoryList(string dictionaryPath)
+        {
+            string json = File.ReadAllText(dictionaryPath);
+
+            JObject obj = JObject.Parse(json);
+
+            List<string> CategoryNames = new List<string>();
+
+            foreach (var dictionary in obj)
+                CategoryNames.Add(dictionary.Key);
+
+            return CategoryNames;
+
+        }
+
+        public ObjectId saveSRTBucket(string srtPath)
+        {
+
+            //save in GridFSBucket
+            using (var stream = File.OpenRead(srtPath))
+            {
+                FormFile formFile = new FormFile(stream, 0, stream.Length, "SrtFile", Path.GetFileName(stream.Name))
+                {
+                    Headers = new HeaderDictionary(),
+                    ContentType = "text/srt"
+                };
+
+                //get the bytes from the content stream of the file
+                byte[] theFileAsBytes = new byte[formFile.Length];
+                using (BinaryReader theReader = new BinaryReader(formFile.OpenReadStream()))
+                {
+                    theFileAsBytes = theReader.ReadBytes((int)formFile.Length);
+                }
+
+                //כיון ששמירת קבצים במונגו נשמר באחסון GridFSBucket  בתוך המונגו 
+                ObjectId srtFile = bucket.UploadFromBytes(formFile.FileName, theFileAsBytes);
+
+                return srtFile;
+            }
+
+        }
+
+        public void setCategory(List<string> selected, Srt srt, string dictionaryPath)
+        {
+
+            // JSON string
+            string json = File.ReadAllText(dictionaryPath);
+
+            //convert JSON to object dynamic
+            dynamic jsonObj = JsonConvert.DeserializeObject(json);
+
+
+            foreach (var CategoryName in selected)
+            {
+
+                List<Srt> srts = jsonObj[CategoryName].ToObject<List<Srt>>();
+
+
+                if (srts.Count > 0)
+                    srts.Add(new Srt { name = srt.name, date=srt.date, fileId = srt.fileId });
+                else
+                    srts = new List<Srt> { new Srt { name = srt.name, date =srt.date, fileId = srt.fileId } };
+
+                jsonObj[CategoryName] = JArray.FromObject(srts);//update json file
+            }
+
+            // serialize JSON directly to a file
+            string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
+            File.WriteAllText(dictionaryPath, output);//write after update json file
+
+        }
+
+
+        public void addSRTToUser(string email, Srt srt)
+        {
+
+            var userIn = _users.Find(u => u.email == email).SingleOrDefault();
+
+            if (userIn.srtList != null)
+                userIn.srtList.Add(new Srt { name = srt.name,date=srt.date, fileId = srt.fileId });
+            else
+                userIn.srtList = new List<Srt> { new Srt { name = srt.name,date=srt.date, fileId = srt.fileId } };
+
+            _users.ReplaceOne(p => p.email == email, userIn);
+
+        }
+
+        //from dictionary
+        public List<Srt> getSrtList(string dictionaryPath)
+        {
+            string json = File.ReadAllText(dictionaryPath);
+
+            //convert string to JSON
+            JObject jsonString = JObject.Parse(json);
+
+            List<Srt> srts = null;
+
+            foreach (var dictionary in jsonString)
+            {
+                srts = JsonConvert.DeserializeObject<List<Srt>>(dictionary.Value.ToString());
+
+            }
+
+            return srts;
+
+        }
+
+
+        public List<Srt> searchBycategoryName(string dictionaryPath,string categoryName)
+        {
+            string json = File.ReadAllText(dictionaryPath);
+
+            //convert string to JSON
+            JObject jsonString = JObject.Parse(json);
+
+            List<Srt> srts = null;
+
+            foreach (var dictionary in jsonString)
+            {
+
+                if (dictionary.Key == categoryName)
+                {
+                    JArray fileSRT = (JArray)jsonString[categoryName];//values from object according to the selected key
+                    srts = fileSRT.ToObject<List<Srt>>();
+                    break;
+                }
+
+            }
+
+            return srts;
+        }
+
+
+        //public byte[] download(ObjectId fileId)
+        //{
+
+        //}
     }
 }

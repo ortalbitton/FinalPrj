@@ -12,30 +12,44 @@ for (var i = 0; i < allEdit.length; i++) {
 
         var numberbtnC = $(this).attr("numberbtnC")
 
-        allComments[parseInt(numberbtnC)].classList.add('hide');
+        var userNameofComment = $(this).attr("userNameofComment")
+        var userName = $(this).attr("userName")
 
-        var f = document.createElement("form");
-        f.setAttribute('action', "../Comment/EditComment");
+        if (userNameofComment == userName) {
 
-        var form = f
-        var url = form.action;
+            allComments[parseInt(numberbtnC)].classList.add('hide');
 
-        var CommentId = $(this).attr("CommentId")
-        var pageNumber = parseInt($(this).attr("pageNumber").toString())
+            var f = document.createElement("form");
+            f.setAttribute('action', "../Comment/EditComment");
 
-        allEditComments[parseInt(numberbtnC)].classList.add('open');
+            var form = f
+            var url = form.action;
 
-        $.ajax({
-            url: url + "?CommentId=" + CommentId + "&pageNumber=" + pageNumber,
-            method: "get",
-            success: function (respon) {
-                allEditComments[numberbtnC].innerHTML = respon;
-            }
+            var CommentId = $(this).attr("CommentId")
+            var pageNumber = parseInt($(this).attr("pageNumber").toString())
 
-        });
+            allEditComments[parseInt(numberbtnC)].classList.add('open');
 
-        numberCommentper = numberbtnC;
+            $.ajax({
+                url: url + "?CommentId=" + CommentId + "&pageNumber=" + pageNumber,
+                method: "get",
+                success: function (respon) {
+                    allEditComments[numberbtnC].innerHTML = respon;
+                }
+
+            });
+
+            numberCommentper = numberbtnC;
+        }
+        else {
+            $(this).prop('disabled', true);
+            $(this).css('pointer-events', 'none');
+            $(this).css('background-color', 'gainsboro');
+            $(this).val('no-edit');
+        }
+
     });
+
 }
 
 // cancel view EditComment

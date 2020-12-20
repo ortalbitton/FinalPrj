@@ -4,35 +4,49 @@ for (var i = 0; i < allDelete.length; i++) {
 
     allDelete[i].addEventListener('click', function () {
 
-        var f = document.createElement("form");
-        f.setAttribute('action', "DeletePost");
+        var userNameofPost = $(this).attr("userNameofPost")
+        var userName = $(this).attr("userName")
+       
+        if (userNameofPost == userName) {
 
-        var form = f
-        var url = form.action;
+            var f = document.createElement("form");
+            f.setAttribute('action', "DeletePost");
 
-        var PostId = $(this).attr("PostId")
-        var pageNumber = parseInt($(this).attr("pageNumber").toString())
+            var form = f
+            var url = form.action;
 
-        var totalPages = parseInt($(this).attr("totalPages").toString())
+            var PostId = $(this).attr("PostId")
+            var pageNumber = parseInt($(this).attr("pageNumber").toString())
 
-        $.ajax({
-            url: url + "?PostId=" + PostId + "&pageNumber=" + pageNumber,
-            method: "get",
-            success: function () {
+            var totalPages = parseInt($(this).attr("totalPages").toString())
 
-                $.ajax({
-                    url: "Refresh?pageNumber=" + pageNumber + "&totalPages=" + totalPages,
-                    method: "get",
-                    success: function (respon) {
-                        $("body").html(respon)
-                    }
+            $.ajax({
+                url: url + "?PostId=" + PostId + "&pageNumber=" + pageNumber,
+                method: "get",
+                success: function () {
 
-                });
+                    $.ajax({
+                        url: "Refresh?pageNumber=" + pageNumber + "&totalPages=" + totalPages,
+                        method: "get",
+                        success: function (respon) {
+                            $("body").html(respon)
+                        }
 
-               
-            }
+                    });
 
-        });
+
+                }
+
+            });
+
+        }
+        else {
+            $(this).prop('disabled', true);
+            $(this).css('pointer-events', 'none');
+            $(this).css('background-color', 'gainsboro');
+            $(this).val('no-delete');
+        }
+        
     });
 }
 

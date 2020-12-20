@@ -1,21 +1,18 @@
-﻿.textarea {
+﻿#status {
     overflow: hidden;
     /* resize: none; */
-    margin-top: 40px;
-    margin-left: 40px;
+    /*margin-top: 40px;
+    margin-left: 40px;*/
     height: 100px;
     border: none;
     border-radius: 4px;
-    padding: 100px;
+    /*padding: 100px;*/
     font-size: 16px;
     font-family: Arial;
     color: black;
-    /*position: absolute;*/
-    left: 100px;
-    top: -100px;
 }
 
-.btnSRT {
+.btnSearch {
     border: none;
     color: white;
     padding: 16px 32px;
@@ -32,31 +29,17 @@
     height: 80px;
 }
 
-.btnSRT1 {
+.btnSearch1 {
     background-color: white;
     color: black;
     border: 2px solid orange;
     border-radius: 4px;
 }
 
-    .btnSRT1:hover {
+    .btnSearch1:hover {
         background-color: orange;
         color: white;
     }
-
-.inputfile {
-    width: 0.1px;
-    height: 0,1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-#checkBox {
-    margin-left: 2%;
-    transform: scale(1.5);
-}
 
 .popup {
     display: none;

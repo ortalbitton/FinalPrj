@@ -14,11 +14,13 @@ namespace FinalProject.Controllers
     {
 
         private readonly PostService _postService;
+        private readonly UserService _userService;
         private readonly int pageSize;
 
-        public PostController(PostService postService)
+        public PostController(PostService postService,UserService userService)
         {
             _postService = postService;
+            _userService = userService;
             pageSize = 10;
 
         }
@@ -28,6 +30,8 @@ namespace FinalProject.Controllers
         public IActionResult Home(bool? isAuthenticated, int? pageNumber)
         {
             ViewBag.isAuthenticated = isAuthenticated;
+
+            ViewBag.userName = _userService.getUserByKey(HttpContext.Session.GetString("Mail")).name; //userName then connected
 
             return View(_postService.getPostList().OrderByDescending(x => x.Id).ToPagedList(pageNumber ?? 1, pageSize));
         }
@@ -52,12 +56,12 @@ namespace FinalProject.Controllers
 
         // POST: Posts/NewPost
         [HttpPost]
-        public IActionResult NewPost(Post post, int pageNumber)
+        public IActionResult NewPost(Post post)
         {
             try
             {
 
-                 pageNumber = 1;
+                int pageNumber = 1;
 
                 _postService.createPost(post, HttpContext.Session.GetString("Mail"));
 
