@@ -27,7 +27,7 @@ namespace FinalProject.Controllers
             _userService = userService;
             dictionaryPath = _srtService.getDictionaryPath();
 
-            countSRTPerPage = 1;
+            countSRTPerPage = 10;
         }
 
         public IActionResult CreateSRT(bool? isAuthenticated)
