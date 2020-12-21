@@ -219,20 +219,19 @@ namespace FinalProject.Services
         //from dictionary
         public List<Srt> getSrtList(string dictionaryPath)
         {
-            string UploadPath = "C:/Users/Owner/Desktop/test/test/wwwroot/files/categorySRT.json";
-            string json = File.ReadAllText(UploadPath);
+            string json = File.ReadAllText(dictionaryPath);
 
             //convert string to JSON
             JObject jsonString = JObject.Parse(json);
 
-            List<Srt> srts = new List<Srt>();
+            List<Srt> srts = null;
 
-            foreach (var item in jsonString)//item=מיליון
+            foreach (var dictionary in jsonString)
             {
-                srts = JsonConvert.DeserializeObject<List<Srt>>(item.Value.ToString()); //all values from object //DeserializeObject המרה מjson  List<Srt> ל 
+                srts = JsonConvert.DeserializeObject<List<Srt>>(dictionary.Value.ToString()); //all values from object 
             }
 
-                return srts;
+            return srts;
 
         }
 
