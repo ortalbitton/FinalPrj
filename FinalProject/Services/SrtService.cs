@@ -228,7 +228,8 @@ namespace FinalProject.Services
 
             foreach (var dictionary in jsonString)
             {
-                srts = JsonConvert.DeserializeObject<List<Srt>>(dictionary.Value.ToString()); //all values from object 
+                if(jsonString[dictionary.Key] !=null)
+                    srts.AddRange(JsonConvert.DeserializeObject<List<Srt>>(dictionary.Value.ToString())); //all values from object 
             }
 
             return srts;

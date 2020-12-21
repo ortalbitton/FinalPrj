@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\userFrames\**" />
+    <Content Remove="wwwroot\userFrames\**" />
+    <EmbeddedResource Remove="wwwroot\userFrames\**" />
+    <None Remove="wwwroot\userFrames\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Services\PostService.cs~RF46ca95d.TMP" />
   </ItemGroup>
 
@@ -22,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\userFrames\" />
   </ItemGroup>
 
 </Project>
