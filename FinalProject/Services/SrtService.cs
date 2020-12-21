@@ -224,7 +224,7 @@ namespace FinalProject.Services
             //convert string to JSON
             JObject jsonString = JObject.Parse(json);
 
-            List<Srt> srts = null;
+            List<Srt> srts = new List<Srt>();
 
             foreach (var dictionary in jsonString)
             {
