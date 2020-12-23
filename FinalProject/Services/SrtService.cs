@@ -144,10 +144,9 @@ namespace FinalProject.Services
 
         }
 
+
         public ObjectId saveSRTBucket(string srtPath)
         {
-
-            //save in GridFSBucket
             using (var stream = File.OpenRead(srtPath))
             {
                 FormFile formFile = new FormFile(stream, 0, stream.Length, "SrtFile", Path.GetFileName(stream.Name))
