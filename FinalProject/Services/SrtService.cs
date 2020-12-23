@@ -15,6 +15,7 @@ using MongoDB.Driver.GridFS;
 using FinalProject.HelpClasses;
 using MongoDB.Driver;
 using FinalProject.Models;
+using Tesseract;
 
 namespace FinalProject.Services
 {
@@ -34,6 +35,23 @@ namespace FinalProject.Services
 
         }
 
+        public string ExtractTextFromPic(String directoryPath)
+        {
+            string image = directoryPath + "thumb.jpeg";
+            string tessPath = _env.ContentRootPath + "/wwwroot/tessdata/";
+            string result = "";
+
+            using (var engine = new TesseractEngine(tessPath, "eng"))
+            {
+                using (var img = Pix.LoadFromFile(image))
+                {
+                    var page = engine.Process(img);
+                    result = page.GetText();
+                }
+            }
+            return result;
+
+        }
 
         public void deleteDir(string directoryPath)
         {

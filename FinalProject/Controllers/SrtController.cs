@@ -97,15 +97,17 @@ namespace FinalProject.Controllers
 
         public ObjectId Convert(IFormFile videoFile, string directoryPath)
         {
-
+            string text = "";
             srtPath = _srtService.getSrtPath(videoFile, directoryPath);
 
             //loop
             //create picture from specific frame of video
             _srtService.extractPic(videoFile.FileName.Replace(" ", "_"), 100, directoryPath);
 
-            _srtService.writeToSrt(srtPath, "fff");
-            _srtService.writeToSrt(srtPath, "ddd");
+            text = _srtService.ExtractTextFromPic(directoryPath);
+
+
+            _srtService.writeToSrt(srtPath, text);
             //end of loop
 
             //save in GridFSBucket
