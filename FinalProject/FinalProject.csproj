@@ -24,6 +24,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
     <PackageReference Include="MongoDB.Driver.GridFS" Version="2.11.2" />
     <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
+    <PackageReference Include="Tesseract" Version="4.1.1" />
   </ItemGroup>
 
 

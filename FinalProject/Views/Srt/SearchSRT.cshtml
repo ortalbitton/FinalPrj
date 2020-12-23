@@ -1,82 +1,82 @@
 ﻿@*Do not touch the model and using*@
 @using PagedList;
 @model IPagedList<FinalProject.Models.Srt>
-@{
-    ViewData["Title"] = "SearchSRT";
-}
-
-<div class="container">
-
-
-    @*Do not touch the variable id="status" *@
-    <textarea class="status" id="status" placeholder="Please enter a SRT name" rows="4" cols="50"></textarea>
-    @*Do not touch the variable id="search" *@
-    <button id="search" type="submit" class="btnSearch btnSearch1">Search</button>
-
-
-    <input id="chooseC" type="button" class="btnSearch btnSearch1" value="Choose category" />
-    <br />     <br />     <br />
-    <div id="categoryNames" class="popup">
-        @foreach (var item in ViewBag.categoryNames)
-        {
-            @*Do not touch the variable categoryName="@item" and id="searchB" *@
-            <input id="searchB" type="submit" value="@item" categoryName="@item" />
-        }
-    </div>
-
-    <br />     <br />     <br />
-
-
-    @if (ViewBag.fail)
-    {
-        <div>no result</div>
+    @{
+        ViewData["Title"] = "SearchSRT";
     }
 
-    <div id="SRTList">
+    <div class="container">
 
-        @foreach (var item in Model)
+
+        @*Do not touch the variable id="status" *@
+        <textarea class="status" id="status" placeholder="Please enter a SRT name" rows="4" cols="50"></textarea>
+        @*Do not touch the variable id="search" *@
+        <button id="search" type="submit" class="btnSearch btnSearch1">Search</button>
+
+
+        <input id="chooseC" type="button" class="btnSearch btnSearch1" value="Choose category" />
+        <br />     <br />     <br />
+        <div id="categoryNames" class="popup">
+            @foreach (var item in ViewBag.categoryNames)
+            {
+                @*Do not touch the variable categoryName="@item" and id="searchB" *@
+                <input id="searchB" type="submit" value="@item" categoryName="@item" />
+            }
+        </div>
+
+        <br />     <br />     <br />
+
+
+        @if (ViewBag.fail)
         {
-            <div>
-                <label>@item.name</label>
-                <a href="@Url.Action("Download", new { fileName = item.name+".srt",fileId= item.fileId })"><img style="background-image: url('/images/download.jpg');height:20px;width:20px;" /></a>
-            </div>
+            <div>no result</div>
         }
 
+        <div id="SRTList">
+
+            @foreach (var item in Model)
+            {
+                <div>
+                    <label>@item.name</label>
+                    <a href="@Url.Action("Download", new { fileName = item.name+".srt",fileId= item.fileId })"><img style="background-image: url('/images/download.jpg');height:20px;width:20px;" /></a>
+                </div>
+            }
 
 
-        <div id="container" style="margin-left: 20px">
-            <p></p>
-            <p></p>
-            <div class="pagination" style="margin-left: 400px">
 
-                @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
-                    asp-route-isAuthenticated="true" inside a tag a*@
+            <div id="container" style="margin-left: 20px">
+                <p></p>
+                <p></p>
+                <div class="pagination" style="margin-left: 400px">
 
-                @if (Model.PageNumber > 1)
-                {
-                    <a asp-action="SearchSRT"
-                       asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-isAuthenticated="true" asp-route-status="@ViewBag.status" asp-route-categoryName="@ViewBag.categoryName">
-                        Previous
-                    </a>
-                }
+                    @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
+                        asp-route-isAuthenticated="true" inside a tag a*@
 
-                @if (Model.PageCount != 0)
-                {
-                    <label>  Page @Model.PageNumber of @Model.PageCount </label>
-                }
+                    @if (Model.PageNumber > 1)
+                    {
+                        <a asp-action="SearchSRT"
+                           asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-isAuthenticated="true" asp-route-status="@ViewBag.status" asp-route-categoryName="@ViewBag.categoryName">
+                            Previous
+                        </a>
+                    }
+
+                    @if (Model.PageCount != 0)
+                    {
+                        <label>  Page @Model.PageNumber of @Model.PageCount </label>
+                    }
 
 
-                @if (Model.PageNumber < Model.PageCount)
-                {
-                    @*Do not touch the variable asp-route-status="@ViewBag.status" asp-route-categoryName="@ViewBag.categoryName"*@
-                    <a asp-action="SearchSRT"
-                       asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-isAuthenticated="true" asp-route-status="@ViewBag.status" asp-route-categoryName="@ViewBag.categoryName">
-                        Next
-                    </a>
-                }
+                    @if (Model.PageNumber < Model.PageCount)
+                    {
+                        @*Do not touch the variable asp-route-status="@ViewBag.status" asp-route-categoryName="@ViewBag.categoryName"*@
+                        <a asp-action="SearchSRT"
+                           asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-isAuthenticated="true" asp-route-status="@ViewBag.status" asp-route-categoryName="@ViewBag.categoryName">
+                            Next
+                        </a>
+                    }
+                </div>
             </div>
+
         </div>
 
     </div>
-
-</div>
