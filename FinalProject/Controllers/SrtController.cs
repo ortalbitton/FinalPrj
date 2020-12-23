@@ -136,7 +136,7 @@ namespace FinalProject.Controllers
 
             if (status != null)
             {
-                resultSRT = _srtService.getSrtList(dictionaryPath).OrderByDescending(x => x.date).Where(x => x.name == status).ToPagedList(pageNumber, countSRTPerPage);
+                resultSRT = _srtService.getSrtList(dictionaryPath).OrderByDescending(x => x.date).Where(x => x.name.Contains(status)).ToPagedList(pageNumber, countSRTPerPage);
                 if(resultSRT.Count == 0)
                     ViewBag.fail = true;
                 return View(resultSRT);
