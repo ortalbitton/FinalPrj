@@ -279,9 +279,14 @@ namespace FinalProject.Services
         }
 
 
-        //public byte[] download(ObjectId fileId)
-        //{
+        public byte[] Download(ObjectId fileId)
+        {
 
-        //}
+            byte[] content = bucket.DownloadAsBytesAsync(fileId).Result;
+
+            return content;
+
+
+        }
     }
 }

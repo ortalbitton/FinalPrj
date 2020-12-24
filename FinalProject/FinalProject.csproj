@@ -32,4 +32,11 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="wwwroot\ffmpeg\ffmpeg.exe" />
+    <None Include="wwwroot\ffmpeg\ffplay.exe" />
+    <None Include="wwwroot\ffmpeg\ffprobe.exe" />
+  </ItemGroup>
+
 </Project>

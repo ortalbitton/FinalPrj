@@ -157,10 +157,12 @@ namespace FinalProject.Controllers
 
 
 
-        public void Download(string fileName, string fileId)
+        public IActionResult Download(string fileName, string fileId)
         {
-   
-            //return File();
+
+            byte[] fileContent = _srtService.Download(ObjectId.Parse(fileId));
+
+            return File(fileContent, "text/plain", fileName);
         }
     }
 }
