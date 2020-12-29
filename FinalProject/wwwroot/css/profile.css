@@ -2,6 +2,16 @@
     margin-top: 5px;
 }
 
+#SRTList {
+    float: left;
+    position: absolute;
+    margin: 6% auto 15% 3%;
+}
+
+#PostList {
+    float: right;
+}
+
 #tweet-body-post {
     width: 82%;
     margin-left: 60px;
@@ -83,4 +93,6 @@
     .popup.open {
         display: block;
     }
+
+
 
