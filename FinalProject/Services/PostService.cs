@@ -73,6 +73,11 @@ namespace FinalProject.Services
             _posts.DeleteOne(p => p.Id == id);
         }
 
+        public List<Post> getUserPost(string name)
+        {
+            return _posts.Find(post => post.name == name).ToList();
+        }
+
 
     }
 }

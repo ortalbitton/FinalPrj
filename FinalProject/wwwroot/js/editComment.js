@@ -26,12 +26,13 @@ for (var i = 0; i < allEdit.length; i++) {
             var url = form.action;
 
             var CommentId = $(this).attr("CommentId")
-            var pageNumber = parseInt($(this).attr("pageNumber").toString())
+            var pageNumberOfPost = parseInt($(this).attr("pageNumberOfPost").toString())
+            var pageNumberOfSRT = parseInt($(this).attr("pageNumberOfSRT").toString())
 
             allEditComments[parseInt(numberbtnC)].classList.add('open');
 
             $.ajax({
-                url: url + "?CommentId=" + CommentId + "&pageNumber=" + pageNumber,
+                url: url + "?CommentId=" + CommentId + "&pageNumberOfPost=" + pageNumberOfPost + "&pageNumberOfSRT=" + pageNumberOfSRT,
                 method: "get",
                 success: function (respon) {
                     allEditComments[numberbtnC].innerHTML = respon;

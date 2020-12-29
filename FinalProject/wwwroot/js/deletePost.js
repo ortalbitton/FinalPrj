@@ -10,23 +10,24 @@ for (var i = 0; i < allDelete.length; i++) {
         if (userNameofPost == userName) {
 
             var f = document.createElement("form");
-            f.setAttribute('action', "DeletePost");
+            f.setAttribute('action', "../Post/DeletePost");
 
             var form = f
             var url = form.action;
 
             var PostId = $(this).attr("PostId")
-            var pageNumber = parseInt($(this).attr("pageNumber").toString())
+            var pageNumberOfPost = parseInt($(this).attr("pageNumberOfPost").toString())
+            var pageNumberOfSRT = parseInt($(this).attr("pageNumberOfSRT").toString())
 
             var totalPages = parseInt($(this).attr("totalPages").toString())
 
             $.ajax({
-                url: url + "?PostId=" + PostId + "&pageNumber=" + pageNumber,
+                url: url + "?PostId=" + PostId + "&pageNumberOfPost=" + pageNumberOfPost,
                 method: "get",
                 success: function () {
 
                     $.ajax({
-                        url: "Refresh?pageNumber=" + pageNumber + "&totalPages=" + totalPages,
+                        url: "Refresh?pageNumberOfPost=" + pageNumberOfPost + "&totalPages=" + totalPages + "&pageNumberOfSRT=" + pageNumberOfSRT,
                         method: "get",
                         success: function (respon) {
                             $("body").html(respon)

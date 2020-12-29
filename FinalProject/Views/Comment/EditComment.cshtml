@@ -15,12 +15,12 @@
             <textarea class="cText" asp-for="text"></textarea>
 
 
-            @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" inside a tag button*@
-            <button type="submit" id="editbuttonC" asp-route-pageNumber="@ViewBag.pageNumber">Edit</button>
+            @*Do not touch the asp-route-pageNumberOfPost="@ViewBag.pageNumberOfPost" inside a tag button*@
+            <button type="submit" id="editbuttonC" asp-route-pageNumberOfPost="@ViewBag.pageNumberOfPost" asp-route-pageNumberOfSRT="@ViewBag.pageNumberOfSRT">Edit</button>
 
             @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" and asp-route-isAuthenticated="true" inside a tag a*@
-            <button asp-action="Home" id="editbutton"
-                    asp-route-pageNumber="@ViewBag.pageNumber" asp-route-isAuthenticated="true">
+            <button asp-action="Profile" asp-controller="User" id="editbutton"
+                      asp-route-pageNumberOfPost="@ViewBag.pageNumberOfPost" asp-route-pageNumberOfSRT="@ViewBag.pageNumberOfSRT" asp-route-isAuthenticated="true">
                 Cancel
             </button>
 

@@ -50,6 +50,11 @@ namespace FinalProject.Services
             _comments.DeleteOne(c => c.Id == id);
         }
 
-    
+        public void updateComment(string id, Comment comment)
+        {
+            _comments.ReplaceOne(c => c.Id == id, comment);
+        }
+
+
     }
 }

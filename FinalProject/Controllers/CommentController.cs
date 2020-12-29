@@ -56,10 +56,11 @@ namespace FinalProject.Controllers
         }
 
         // GET: Comments/EditComment/5
-        public IActionResult EditComment(string CommentId, int pageNumber)
+        public IActionResult EditComment(string CommentId, int pageNumberOfPost,int pageNumberOfSRT)
         {
             ViewBag.name = _commentService.getCommentById(CommentId).name;
-            ViewBag.pageNumber = pageNumber;
+            ViewBag.pageNumberOfPost = pageNumberOfPost;
+            ViewBag.pageNumberOfSRT = pageNumberOfSRT;
             ViewData["CommentId"] = CommentId;
             return View(_commentService.getCommentById(CommentId));
         }
@@ -67,7 +68,7 @@ namespace FinalProject.Controllers
         // POST: Comments/EditComment/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditComment(Comment commentIn, int pageNumber)
+        public IActionResult EditComment(Comment commentIn, int pageNumberOfPost,int pageNumberOfSRT)
         {
             try
             {
@@ -84,11 +85,12 @@ namespace FinalProject.Controllers
                     foreach(var c in  post.comList.Where(c => c.Id == comment.Id))
                     {
                         c.text= commentIn.text;
+                        _commentService.updateComment(c.Id,c);
                     }
                     _postService.updatePost(post.Id, post);
                 }
 
-                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
+                  return RedirectToAction("Profile", "User", new { isAuthenticated = true, pageNumberOfPost, pageNumberOfSRT });
 
             }
             catch
@@ -99,7 +101,7 @@ namespace FinalProject.Controllers
 
 
         // GET: Comments/DeleteComment/5
-        public IActionResult DeleteComment(string CommentId, int pageNumber)
+        public IActionResult DeleteComment(string CommentId, int pageNumberOfPost)
         {
             try
             {
@@ -114,7 +116,7 @@ namespace FinalProject.Controllers
 
                 _commentService.removeComment(CommentId);
 
-                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
+                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumberOfPost });
             }
             catch
             {

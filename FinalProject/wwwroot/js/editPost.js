@@ -21,18 +21,19 @@ for (var i = 0; i < allEdit.length; i++) {
             allPosts[parseInt(numberbtn)].classList.add('hide');
 
             var f = document.createElement("form");
-            f.setAttribute('action', "EditPost");
+            f.setAttribute('action', "../Post/EditPost");
 
             var form = f
             var url = form.action;
 
             var PostId = $(this).attr("PostId")
-            var pageNumber = parseInt($(this).attr("pageNumber").toString())
+            var pageNumberOfPost = parseInt($(this).attr("pageNumberOfPost").toString())
+            var pageNumberOfSRT = parseInt($(this).attr("pageNumberOfSRT").toString())
 
             allEditPosts[parseInt(numberbtn)].classList.add('open');
 
             $.ajax({
-                url: url + "?PostId=" + PostId + "&pageNumber=" + pageNumber,
+                url: url + "?PostId=" + PostId + "&pageNumberOfPost=" + pageNumberOfPost + "&pageNumberOfSRT=" + pageNumberOfSRT,
                 method: "get",
                 success: function (respon) {
                     allEditPosts[numberbtn].innerHTML = respon;

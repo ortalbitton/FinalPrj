@@ -31,20 +31,7 @@ namespace FinalProject.Controllers
         {
             ViewBag.isAuthenticated = isAuthenticated;
 
-            ViewBag.userName = _userService.getUserByKey(HttpContext.Session.GetString("Mail")).name; //userName then connected
-
             return View(_postService.getPostList().OrderByDescending(x => x.Id).ToPagedList(pageNumber ?? 1, pageSize));
-        }
-
-        public IActionResult Refresh(int pageNumber,int totalPages)
-        {
-            int totalpostPerPage = _postService.getPostList().OrderByDescending(x => x.Id).ToPagedList(pageNumber, pageSize).Count;
-            int totalpost = _postService.getPostList().Count;
-
-            if (totalpostPerPage == 0 && totalPages!=1)
-                pageNumber = totalPages - 1;
-
-            return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
         }
 
         /// GET: Posts/NewPost
@@ -75,10 +62,11 @@ namespace FinalProject.Controllers
         }
 
         // GET: Posts/EditPost/5
-        public IActionResult EditPost(string PostId, int pageNumber)
+        public IActionResult EditPost(string PostId, int pageNumberOfPost,int pageNumberOfSRT)
         {
             ViewBag.name = _postService.getPostById(PostId).name;
-            ViewBag.pageNumber = pageNumber;
+            ViewBag.pageNumberOfPost = pageNumberOfPost;
+            ViewBag.pageNumberOfSRT = pageNumberOfSRT;
             ViewData["PostId"] = PostId;
             return View(_postService.getPostById(PostId));
         }
@@ -86,7 +74,7 @@ namespace FinalProject.Controllers
         // POST: Posts/EditPost/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditPost(Post postIn, int pageNumber)
+        public IActionResult EditPost(Post postIn, int pageNumberOfPost,int pageNumberOfSRT)
         {
             try
             {
@@ -100,7 +88,7 @@ namespace FinalProject.Controllers
                 post.text = postIn.text;
 
                 _postService.updatePost(post.Id, post);
-                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
+                return RedirectToAction("Profile", "User", new { isAuthenticated = true, pageNumberOfPost, pageNumberOfSRT });
 
             }
             catch
@@ -110,13 +98,13 @@ namespace FinalProject.Controllers
         }
 
         // GET: Posts/DeletePost/5
-        public IActionResult DeletePost(string PostId, int pageNumber)
+        public IActionResult DeletePost(string PostId, int pageNumberOfPost)
         {
             try
             {
                 var post = _postService.getPostById(PostId);
                 _postService.removePost(post.Id);
-                return RedirectToAction("Home", "Post", new { isAuthenticated = true, pageNumber });
+                return RedirectToAction("Profile", "User", new { isAuthenticated = true, pageNumberOfPost });
             }
             catch
             {

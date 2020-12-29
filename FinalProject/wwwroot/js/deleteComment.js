@@ -16,17 +16,18 @@ for (var i = 0; i < allDelete.length; i++) {
             var url = form.action;
 
             var CommentId = $(this).attr("CommentId")
-            var pageNumber = parseInt($(this).attr("pageNumber").toString())
+            var pageNumberOfPost = parseInt($(this).attr("pageNumberOfPost").toString())
+            var pageNumberOfSRT = parseInt($(this).attr("pageNumberOfSRT").toString())
 
             var totalPages = parseInt($(this).attr("totalPages").toString())
 
             $.ajax({
-                url: url + "?CommentId=" + CommentId + "&pageNumber=" + pageNumber,
+                url: url + "?CommentId=" + CommentId + "&pageNumberOfPost=" + pageNumberOfPost,
                 method: "get",
                 success: function () {
 
                     $.ajax({
-                        url: "Refresh?pageNumber=" + pageNumber + "&totalPages=" + totalPages,
+                        url: "Refresh?pageNumberOfPost=" + pageNumberOfPost + "&totalPages=" + totalPages + "&pageNumberOfSRT=" + pageNumberOfSRT,
                         method: "get",
                         success: function (respon) {
                             $("body").html(respon)

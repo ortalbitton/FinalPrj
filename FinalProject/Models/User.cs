@@ -23,6 +23,6 @@ namespace FinalProject.Models
         [Compare("password")]
         public string confirmPassword { get; set; }
 
-        public ICollection<Srt> srtList { get; set; }
+        public List<Srt> srtList { get; set; }
     }
 }
