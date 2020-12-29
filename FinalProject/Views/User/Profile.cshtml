@@ -24,8 +24,8 @@
                 <p></p>
                 <div class="pagination" style="margin-left: 20%">
 
-                    @*Do not touch the variable asp-action="Profile",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
-                    asp-route-isAuthenticated="true" inside a tag a*@
+                    @*Do not touch the variable asp-action="Profile",     asp-route-pageNumberOfSRT="@( ViewBag.pageNumberOfSRT - 1)"
+                        asp-route-pageNumberOfPost="@ViewBag.pageNumberOfPost" ,asp-route-isAuthenticated="true" inside a tag a*@
 
                     @if (ViewBag.pageNumberOfSRT > 1)
                     {
@@ -73,27 +73,26 @@
             @foreach (var item in ViewBag.posts)
             {
 
-                @* Do not touch the variable class="post" inside a tag div *@
-                <div id="tweet-body-post" class="post">
+        <div id="tweet-body-post" class="post">
 
 
-                    @*user name of post*@
-                    <label class="UserNameP">@item.name</label>
+            @*user name of post*@
+            <label class="UserNameP">@item.name</label>
 
-                    @*post*@
-                    <textarea class="postText" readonly>@item.text</textarea>
-
-
-                    @*event click to show the view of EditPost
-                    Do not touch the variable id="edit" and PostId="@item.Id" and pageNumberOfPost=@Model.PageNumber and numberbtn="@(numberbtn)" and userNameofPost="@item.name" and userName="@ViewBag.userName" inside a tag input*@
-                    <input type="submit" class="btnPro btnPro2" id="edit" PostId="@item.Id" value="Edit" pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT=@ViewBag.pageNumberOfSRT userNameofPost="@item.name" userName="@ViewBag.userName" numberbtn="@(numberbtn)" />
-
-                    @*event click to DeletePost
-                    Do not touch the variable id="delete" and PostId="@item.Id" and pageNumber=@Model.PageNumber and totalPages="@Model.PageCount" and userNameofPost="@item.name" and userName="@ViewBag.userName" inside a tag input*@
-                    <input type="submit" class="btnPro btnPro2" id="delete" PostId="@item.Id" value="Delete" totalPages="@ViewBag.posts.PageCount" pageNumberOfSRT=@ViewBag.pageNumberOfSRT pageNumberOfPost=@ViewBag.pageNumberOfPost userNameofPost="@item.name" userName="@ViewBag.userName" />
+            @*post*@
+            <textarea class="postText" readonly>@item.text</textarea>
 
 
-                </div>
+            @*event click to show the view of EditPost
+        Do not touch the variable id="edit" and PostId="@item.Id" value="Edit" pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT=@ViewBag.pageNumberOfSRT userNameofPost="@item.name" userName="@ViewBag.userName" numberbtn="@(numberbtn)" inside a tag input*@
+            <input type="submit" class="btnPro btnPro2" id="edit" PostId="@item.Id" value="Edit" pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT=@ViewBag.pageNumberOfSRT userNameofPost="@item.name" userName="@ViewBag.userName" numberbtn="@(numberbtn)" />
+
+            @*event click to DeletePost
+        Do not touch the variable id="delete" and PostId="@item.Id" value="Delete" totalPages="@ViewBag.posts.PageCount" pageNumberOfSRT=@ViewBag.pageNumberOfSRT pageNumberOfPost=@ViewBag.pageNumberOfPost userNameofPost="@item.name" userName="@ViewBag.userName" inside a tag input*@
+            <input type="submit" class="btnPro btnPro2" id="delete" PostId="@item.Id" value="Delete" totalPages="@ViewBag.posts.PageCount" pageNumberOfSRT=@ViewBag.pageNumberOfSRT pageNumberOfPost=@ViewBag.pageNumberOfPost userNameofPost="@item.name" userName="@ViewBag.userName" />
+
+
+        </div>
 
                 @*place to show the view of EditPost
                 Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
@@ -107,24 +106,24 @@
                         {
 
                             @*Do not touch the variable class="comment" inside a tag div*@
-                            <div id="tweet-body-comment" class="comment">
+                    <div id="tweet-body-comment" class="comment">
 
-                                @*//user name of comment to user name of post*@
-                                <label class="UserNameC">@comment.name to @item.name</label>
+                        @*//user name of comment to user name of post*@
+                        <label class="UserNameC">@comment.name to @item.name</label>
 
 
-                                @*//comment*@
-                                <textarea class="commentText" readonly>@comment.text</textarea>
+                        @*//comment*@
+                        <textarea class="commentText" readonly>@comment.text</textarea>
 
-                                @*event click to show the view of EditComment
-                                Do not touch the variable id="commentEdit" and CommentId="@comment.Id" and pageNumberOfPost=@ViewBag.posts.PageNumber pageNumberOfSRT="@ViewBag.srts.PageNumber" and numberbtnC="@(numberbtnC)" and userNameofComment="@item.name" and userName="@ViewBag.userName" inside a tag input*@
-                                <input type="submit" class="btnPro btnPro2" id="commentEdit" value="EditC" CommentId="@comment.Id" pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT="@ViewBag.pageNumberOfSRT" numberbtnC="@(numberbtnC)" userNameofComment="@comment.name" userName="@ViewBag.userName" />
+                        @*event click to show the view of EditComment
+                            Do not touch the variable id="commentEdit" CommentId="@comment.Id" pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT="@ViewBag.pageNumberOfSRT" numberbtnC="@(numberbtnC)" userNameofComment="@comment.name" userName="@ViewBag.userName" inside a tag input*@
+                        <input type="submit" class="btnPro btnPro2" id="commentEdit" value="EditC" CommentId="@comment.Id" pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT="@ViewBag.pageNumberOfSRT" numberbtnC="@(numberbtnC)" userNameofComment="@comment.name" userName="@ViewBag.userName" />
 
-                                @*event click to DeleteComment
-                                Do not touch the variable id="delete" and CommentId="@comment.Id" and pageNumberOfPost=@ViewBag.posts.PageNumber pageNumberOfSRT="@ViewBag.srts.PageNumber" and totalPages="@Model.PageCount" and userNameofComment="@item.name" and userName="@ViewBag.userName" inside a tag input*@
-                                <input type="submit" class="btnPro btnPro2" id="deleteC" CommentId="@comment.Id" value="DeleteC" totalPages=@ViewBag.posts.PageCount pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT=@ViewBag.pageNumberOfSRT userNameofComment="@comment.name" userName="@ViewBag.userName" />
+                        @*event click to DeleteComment
+                             Do not touch the variable id="deleteC" CommentId="@comment.Id" totalPages=@ViewBag.posts.PageCount pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT=@ViewBag.pageNumberOfSRT userNameofComment="@comment.name" userName="@ViewBag.userName" inside a tag input*@
+                        <input type="submit" class="btnPro btnPro2" id="deleteC" CommentId="@comment.Id" value="DeleteC" totalPages=@ViewBag.posts.PageCount pageNumberOfPost=@ViewBag.pageNumberOfPost pageNumberOfSRT=@ViewBag.pageNumberOfSRT userNameofComment="@comment.name" userName="@ViewBag.userName" />
 
-                            </div>
+                    </div>
 
                             @*place to show the view of EditComment
                             Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
@@ -147,8 +146,8 @@
                 <p></p>
                 <div class="pagination" style="margin-left: 400px">
 
-                    @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
-                    asp-route-isAuthenticated="true" inside a tag a*@
+                    @*Do not touch the variable asp-action="Profile",  asp-route-pageNumberOfPost="@(ViewBag.pageNumberOfPost - 1)"
+                          asp-route-pageNumberOfSRT="@ViewBag.pageNumberOfSRT"" ,asp-route-isAuthenticated="true" inside a tag a*@
 
                     @if (ViewBag.pageNumberOfPost > 1)
                     {
