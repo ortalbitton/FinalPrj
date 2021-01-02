@@ -50,6 +50,7 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 2147483647)]
         public IActionResult CreateSRT(IFormFile VideoFile, List<SelectListItem> categoryList)
         {
 
