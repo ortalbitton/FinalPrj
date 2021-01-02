@@ -16,6 +16,10 @@ $("#VideoFile").change(function () {
     if (this.files[0].size > 2147483647) {
         document.getElementById("sizelimit").innerHTML = "the file is too large";
     }
+    //if (this.files[0].size > 20971520000) {
+    //    document.getElementById("sizelimit").innerHTML = "the file is too large";
+    //}
+
 
 });
 
