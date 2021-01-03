@@ -243,11 +243,20 @@ namespace FinalProject.Services
 
             List<Srt> srts = new List<Srt>();
 
+            HashSet<string> knownValues = new HashSet<string>();
+
             foreach (var dictionary in jsonString)
             {
-                if(jsonString[dictionary.Key] !=null)
-                    srts.AddRange(JsonConvert.DeserializeObject<List<Srt>>(dictionary.Value.ToString())); //all values from object 
-            }
+    
+                foreach(Srt srt in JsonConvert.DeserializeObject<List<Srt>>(dictionary.Value.ToString()))
+                {
+                    if(knownValues.Add(srt.fileId))
+                        srts.Add(srt);
+
+                }
+
+
+            }         
 
             return srts;
 
