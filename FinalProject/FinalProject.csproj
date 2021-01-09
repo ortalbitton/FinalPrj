@@ -6,17 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\ffmpeg\**" />
-    <Compile Remove="wwwroot\userFrames\**" />
-    <Content Remove="wwwroot\ffmpeg\**" />
-    <Content Remove="wwwroot\userFrames\**" />
-    <EmbeddedResource Remove="wwwroot\ffmpeg\**" />
-    <EmbeddedResource Remove="wwwroot\userFrames\**" />
-    <None Remove="wwwroot\ffmpeg\**" />
-    <None Remove="wwwroot\userFrames\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Services\PostService.cs~RF46ca95d.TMP" />
   </ItemGroup>
 
@@ -51,6 +40,14 @@
     <None Include="Views\User\SignUp.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\ffmpeg\ffmpeg.exe" />
+    <None Include="wwwroot\ffmpeg\ffplay.exe" />
+    <None Include="wwwroot\ffmpeg\ffprobe.exe" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\userFrames\" />
   </ItemGroup>
 
 </Project>
