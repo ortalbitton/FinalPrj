@@ -34,7 +34,7 @@
         @if (ViewBag.isAuthenticated == true)
         {
             <div class="topnav">
-                <a class="active" asp-controller="Post" asp-action="Home" asp-route-isAuthenticated="true" asp-route-pageNumber="1">Translating</a>
+                <a class="active" asp-controller="Post" asp-action="Home" asp-route-isAuthenticated="true" asp-route-pageNumber="1" >Translating</a>
                 <a id="searchSRT" asp-controller="Srt" asp-action="SearchSRT" asp-route-isAuthenticated="true" asp-route-pageNumber="1">Search for SRT</a>
                 <a asp-controller="User" asp-action="Profile" asp-route-isAuthenticated="true" asp-route-pageNumberOfSRT="1" asp-route-pageNumberOfPost="1">Profile</a>
                 <a id="createSRT" asp-controller="Srt" asp-action="CreateSRT" asp-route-isAuthenticated="true">Create SRT</a>

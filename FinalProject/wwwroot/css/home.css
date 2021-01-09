@@ -1,11 +1,12 @@
 ﻿.button {
     border: none;
-    color: white;
+    color: #f2f2f2;
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
+    font-size: large;
+    background-color: #f2f2f2;
     margin: 0.5px 1px;
     transition-duration: 0.4s;
     cursor: pointer;
@@ -13,26 +14,35 @@
     resize: none;
     margin-top: 40px;
     height: 80px;
+    position: relative;
+    left: 350px;
+    top: -100px;
 }
 
 .button1 {
     background-color: white;
     color: black;
-    border: 2px solid #4CAF50;
-    border-radius: 4px;
+    border: 10px solid #7CFC00;
+    border-radius: 1px;
+    position: relative;
+    left: 450px;
+    border-radius: 50%;
 }
 
     .button1:hover {
-        background-color: #4CAF50;
+        background-color: #7CFC00;
         color: white;
     }
 
 .button2 {
-    padding: 20px 20px;
     background-color: white;
-    color: gray;
-    border: 0px sold;
+    color: black;
+    border: 2px solid #7CFC00;
     border-radius: 4px;
+    position: relative;
+    left: 800px;
+    width:90px;
+    height:75px;
 }
 
     .button2:hover {
@@ -47,31 +57,27 @@
 
     #tweet-body .postText {
         overflow: hidden;
-        /* resize: none; */
-        margin-top: 40px;
-        margin-left: 20%;
+        top: -100px;
+        left: 350px;
+        width: 100px;
         height: 100px;
-        border: 3px solid #4CAF50;
+        border: 2px solid #d9bcda;
         border-radius: 4px;
         padding: 100px;
-        font-size: 16px;
-        font-family: Arial;
-        /*position: absolute;*/
-        width: 50%;
+        font-size: large;
+        position: absolute;
     }
 
     #tweet-body .commentText {
         overflow: hidden;
-        /* resize: none; */
-        margin-top: 40px;
-        height: 100px;
-        border: 3px solid #4CAF50;
+        top: 200px;
+        left: 390px;
+        width: 400px;
+        height: 150px;
+        border: 2px solid #d9bcda;
         border-radius: 4px;
-        /*padding: 100px;*/
-        font-size: 16px;
-        font-family: Arial;
-        width: 60%;
-        margin-left: 20%;
+        font-size: large;
+        position: absolute;
     }
 
 
@@ -96,12 +102,18 @@
 
 .postUserName {
     position: absolute;
-    margin-left: 40px;
+    left: 400px;
+    color: purple;
+    text-shadow: 3px 3px 7px #d9bcda;
+    top:-90px;
 }
 
 .commentUserName {
     position: absolute;
-    margin-left: 11%;
+    left: 400px;
+    color: purple;
+    text-shadow: 3px 3px 7px #d9bcda;
+    top: 170px;
 }
 
 #newP{

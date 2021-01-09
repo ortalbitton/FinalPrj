@@ -1,5 +1,12 @@
 ﻿body {
     font-family: Arial, Helvetica, sans-serif;
+    background-image: url('/images/תמונה5.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    padding: 25px;
+    font-style: italic;
+    font-size: large;
 }
 
 form {
@@ -7,22 +14,25 @@ form {
 }
 
 input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    width: 25%;
+    padding: 12px 12px;
+    margin: 5px 0;
     display: inline-block;
-    border: 1px solid #ccc;
     box-sizing: border-box;
+    border: none;
+
 }
 
 .SignInbtn {
-    background-color: #4CAF50;
+    background-color: #d9bcda;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 35%;
+  left:300px;
+    font-size: large;
 }
 
     .SignInbtn:hover {
@@ -33,15 +43,36 @@ input[type=text], input[type=password] {
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
+  
 }
 
 .container {
+    
+    border: none;
+    background-color: none;
+    opacity: 0.75;
     padding: 20px;
-    width: 75%; /* Full width */
-    height: 75%; /* Full height */
-    margin: 5% auto 15% auto;
+    position: relative;
 }
+.box {
+    
+    opacity: 1;
+    background-color: white;
+    font-size: larger;
+    color: white;
+    text-shadow: 3px 3px 7px #d9bcda;
+    position: relative;
+    left: 350px;
+}
+.box2 {
 
+    width: 75%;
+    background-color: white;
+    font-size: larger;
+    color: black;
+    position: relative;
+    left: 350px;
+}
 span.psw {
     float: right;
     padding-top: 16px;

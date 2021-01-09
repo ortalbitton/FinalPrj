@@ -1,114 +1,114 @@
 ﻿@*Do not touch the model and using*@
 @using PagedList;
 @model IPagedList<FinalProject.Models.Post>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <body>
 
-<body>
+        <div id="newP" class="container">
 
-    <div id="newP" class="container">
+            @* event click to show the view of NewPost
+                Do not touch the variable id="newPostbtn" inside a tag input  *@
+            <input type="submit" class="button button1" id="newPostbtn" value="NewPost" />
 
-        @* event click to show the view of NewPost
-            Do not touch the variable id="newPostbtn" inside a tag input  *@
-        <input type="submit" class="button button1" id="newPostbtn" value="NewPost" />
-
-        @* place to show the view of NewPost
-            Do not touch the variable id="newPost" inside a tag div  *@
-        <div id="newPost" class="popup"></div>
-    </div>
-
-    @*Do not touch the variable id="PostsAndComments" inside a tag div  *@
-    <div id="PostsAndComments" class="container">
-
-        @{int numberbtn = 0;}
-        @foreach (var item in Model)
-        {
-
-            @* Do not touch the variable class="post" inside a tag div *@
-            <div id="tweet-body" class="post">
-
-
-                @*user name of post*@
-                <label class="postUserName">@item.name</label>
-
-                @*post*@
-                <textarea class="postText" readonly>@item.text</textarea>
-
-
-                @*event click to show the view of NewComment
-                    Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
-                <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
-
-            </div>
-
-
-            <div class="comments">
-                @if (item.comList != null)
-                {
-                    @foreach (var comment in item.comList)
-                    {
-
-                        @*Do not touch the variable class="comment" inside a tag div*@
-                        <div id="tweet-body" class="comment">
-
-                            @*//user name of comment to user name of post*@
-                            <label class="commentUserName">@comment.name to @item.name</label>
-
-
-                            @*//comment*@
-                            <textarea class="commentText" readonly>@comment.text</textarea>
-
-                        </div>
-
-                        @*place to show the view of EditComment
-                            Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
-                        <div id="EditComment" class="popup"></div>
-
-                    }
-
-                }
-            </div>
-
-            @*place to show the view of NewComment
-                Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
-            <div id="NewComment" class="popup"></div>
-
-
-            numberbtn++;
-
-        }
-
-        <div id="container" style="margin-left: 20px">
-            <p></p>
-            <p></p>
-            <div class="pagination" style="margin-left: 400px">
-
-                @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
-                    asp-route-isAuthenticated="true" inside a tag a*@
-
-                @if (Model.PageNumber > 1)
-                {
-                    <a asp-action="Home"
-                       asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-isAuthenticated="true">
-                        Previous
-                    </a>
-                }
-
-                @if (Model.PageCount != 0)
-                {
-                    <label>  Page @Model.PageNumber of @Model.PageCount </label>
-                }
-
-
-                @if (Model.PageNumber < Model.PageCount)
-                {
-                    <a asp-action="Home"
-                       asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-isAuthenticated="true">
-                        Next
-                    </a>
-                }
-            </div>
+            @* place to show the view of NewPost
+                Do not touch the variable id="newPost" inside a tag div  *@
+            <div id="newPost" class="popup"></div>
         </div>
 
-    </div>
+        @*Do not touch the variable id="PostsAndComments" inside a tag div  *@
+        <div id="PostsAndComments" class="container">
 
-</body>
+            @{int numberbtn = 0;}
+            @foreach (var item in Model)
+            {
+
+                @* Do not touch the variable class="post" inside a tag div *@
+                <div id="tweet-body" class="post">
+
+
+                    @*user name of post*@
+                    <label class="postUserName">@item.name</label>
+
+                    @*post*@
+                    <textarea class="postText" readonly>@item.text</textarea>
+
+
+                    @*event click to show the view of NewComment
+                        Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
+                    <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
+
+                </div>
+
+
+                <div class="comments">
+                    @if (item.comList != null)
+                    {
+                        @foreach (var comment in item.comList)
+                        {
+
+                            @*Do not touch the variable class="comment" inside a tag div*@
+                            <div id="tweet-body" class="comment">
+
+                                @*//user name of comment to user name of post*@
+                                <label class="commentUserName">@comment.name to @item.name</label>
+
+
+                                @*//comment*@
+                                <textarea class="commentText" readonly>@comment.text</textarea>
+
+                            </div>
+
+                            @*place to show the view of EditComment
+                                Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
+                            <div id="EditComment" class="popup"></div>
+
+                        }
+
+                    }
+                </div>
+
+                @*place to show the view of NewComment
+                    Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
+                <div id="NewComment" class="popup"></div>
+
+
+                numberbtn++;
+
+            }
+
+            <div id="container" style="margin-left: 20px">
+                <p></p>
+                <p></p>
+                <div class="pagination" style="margin-left: 400px">
+
+                    @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
+                        asp-route-isAuthenticated="true" inside a tag a*@
+
+                    @if (Model.PageNumber > 1)
+                    {
+                        <a asp-action="Home"
+                           asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-isAuthenticated="true">
+                            Previous
+                        </a>
+                    }
+
+                    @if (Model.PageCount != 0)
+                    {
+                        <label>  Page @Model.PageNumber of @Model.PageCount </label>
+                    }
+
+
+                    @if (Model.PageNumber < Model.PageCount)
+                    {
+                        <a asp-action="Home"
+                           asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-isAuthenticated="true">
+                            Next
+                        </a>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+    </body>
 

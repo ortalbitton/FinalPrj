@@ -2,32 +2,33 @@
 
 
 <body>
-
+    
     <div class="container">
+        <div class="box">
+            <a asp-action="SignUp" ><i>SignUp</i></a>
+            <a asp-action="SignIn"><i>SignIn</i></a>
+        </div>
+        <div class="box2">
+            <form asp-action="SignIn">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="email"></label>
+                <input asp-for="email" placeholder="Enter Email" />
+                <span asp-validation-for="email" class="text-danger"></span>
 
-        <a asp-action="SignUp">SignUp</a>
-        <a asp-action="SignIn">SignIn</a>
 
-        <form asp-action="SignIn">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="password"></label>
+                <input asp-for="password" type="password" placeholder="Enter Password" />
+                <span asp-validation-for="password" class="text-danger"></span>
+                <div class="box2">
+                    <button class="SignInbtn" type="submit">SignIn</button>
+                </div>
+                @if (ViewBag.Fail)
+                {
+                    <div>Login failed. Please try again.</div>
+                }
 
-            <label asp-for="email"></label>
-            <input asp-for="email" placeholder="Enter Email" />
-            <span asp-validation-for="email" class="text-danger"></span>
-
-
-            <label asp-for="password"></label>
-            <input asp-for="password" type="password" placeholder="Enter Password" />
-            <span asp-validation-for="password" class="text-danger"></span>
-
-            <button class="SignInbtn" type="submit">SignIn</button>
-
-            @if (ViewBag.Fail)
-            {
-                <div>Login failed. Please try again.</div>
-            }
-
-        </form>
+            </form>
+        </div>
     </div>
 
 </body>

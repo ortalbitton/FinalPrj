@@ -9,18 +9,17 @@
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 4px;
+
 }
 
 .postbtn {
     background-color: white;
     color: black;
-    border: 2px solid #4CAF50;
+    border: 2px solid #d9bcda;
 }
-
-
-.tweet-body {
+    .tweet-body {
     width: 82%;
-    margin-left: 60px;
+    
 }
 
     .tweet-body .status {
@@ -33,4 +32,5 @@
         padding: 10px;
         font-size: 16px;
         font-family: Arial;
+ 
     }
