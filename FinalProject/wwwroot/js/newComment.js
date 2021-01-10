@@ -37,12 +37,10 @@ for (var i = 0; i < allReply.length; i++) {
 
 // hide view NewComment
 $(document).mouseup(function (e) {
-    if (allReply.length != 0) {
-        var a = allNewComments[parseInt(numberComment)];
-        if (!a.contains(e.target)) {
+        var a = $(allNewComments[parseInt(numberComment)]);
+    if (!a.is(e.target) && a.has(e.target).length === 0 && allNewComments.length !== 0) {
             allNewComments[parseInt(numberComment)].classList.remove('open');
         }
-    }
 });
 
 

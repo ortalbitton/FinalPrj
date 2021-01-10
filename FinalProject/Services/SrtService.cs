@@ -243,6 +243,7 @@ namespace FinalProject.Services
 
             List<Srt> srts = new List<Srt>();
 
+            //in order to view all srt files that have the same file name but not the same file
             HashSet<string> knownValues = new HashSet<string>();
 
             foreach (var dictionary in jsonString)

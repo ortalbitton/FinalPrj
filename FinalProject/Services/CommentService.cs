@@ -55,6 +55,42 @@ namespace FinalProject.Services
             _comments.ReplaceOne(c => c.Id == id, comment);
         }
 
+        public void addUserToBlockList(string commentId, string email)
+        {
+
+            var commentIn = _comments.Find(p => p.Id == commentId).SingleOrDefault();
+
+            var userIn = _users.Find(u => u.email == email).SingleOrDefault();
+
+            if (commentIn.block != null)
+                commentIn.block.Add(new User { Id = userIn.Id, name = userIn.name, email = userIn.email });
+            else
+                commentIn.block = new List<User> { new User { Id = userIn.Id, name = userIn.name, email = userIn.email } };
+
+            _comments.ReplaceOne(p => p.Id == commentId, commentIn);
+
+        }
+
+        public int checkBlockList(string id)
+        {
+            Comment comment = getCommentById(id);
+
+            int counter = 0;
+
+            HashSet<string> knownValues = new HashSet<string>();
+
+
+            foreach (User user in comment.block)
+            {
+                if (knownValues.Add(user.email))
+                    counter++;
+
+            }
+
+            return counter;
+        }
+
+
 
     }
 }

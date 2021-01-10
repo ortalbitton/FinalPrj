@@ -78,6 +78,42 @@ namespace FinalProject.Services
             return _posts.Find(post => post.name == name).ToList();
         }
 
+        public void addUserToBlockList(string postId, string email)
+        {
+
+            var postIn = _posts.Find(p => p.Id == postId).SingleOrDefault();
+
+            var userIn = _users.Find(u => u.email == email).SingleOrDefault();
+
+            if (postIn.block != null)
+                postIn.block.Add(new User { Id = userIn.Id, name = userIn.name, email = userIn.email });
+            else
+                postIn.block = new List<User> { new User { Id = userIn.Id, name = userIn.name, email = userIn.email } };
+
+            _posts.ReplaceOne(p => p.Id == postId, postIn);
+
+        }
+
+        public int checkBlockList(string id)
+        {
+            Post post = getPostById(id);
+
+            int counter = 0;
+
+            HashSet<string> knownValues = new HashSet<string>();
+
+
+            foreach (User user in post.block)
+            {
+                if (knownValues.Add(user.email))
+                    counter++;
+
+            }
+
+            return counter;
+        }
+
+
 
     }
 }

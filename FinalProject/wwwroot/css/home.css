@@ -31,7 +31,7 @@
     padding: 20px 20px;
     background-color: white;
     color: gray;
-    border: 0px sold;
+    border: 0px solid;
     border-radius: 4px;
 }
 
@@ -39,6 +39,13 @@
         background-color: purple;
         color: white;
     }
+
+    /*when click on button block this style change*/
+    .button2.style {
+        pointer-events: none;
+        background-color: gainsboro;
+    }
+
 
 #tweet-body {
     width: 82%;

@@ -37,6 +37,12 @@ namespace FinalProject.Services
             return _users.Find(user => user.email == email).SingleOrDefault();
         }
 
+        public List<User> getUserList()
+        {
+            return _users.Find(user => true).ToList();
+        }
+
+
 
     }
 }

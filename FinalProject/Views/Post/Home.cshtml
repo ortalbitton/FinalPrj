@@ -18,7 +18,7 @@
     @*Do not touch the variable id="PostsAndComments" inside a tag div  *@
     <div id="PostsAndComments" class="container">
 
-        @{int numberbtn = 0;}
+        @{int numberbtn = 0 , numberbtnC = 0;}
         @foreach (var item in Model)
         {
 
@@ -34,8 +34,11 @@
 
 
                 @*event click to show the view of NewComment
-                    Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
+                Do not touch the variable id="reply" and PostId="@item.Id" and pageNumber=@Model.PageNumber and numberbtn="@(numberbtn)" inside a tag input*@
                 <input type="submit" class="button button2" id="reply" PostId="@item.Id" value="NewReply" pageNumber=@Model.PageNumber numberbtn="@(numberbtn)" />
+
+                <input type="submit" class="button button2" id="block" PostId="@item.Id" value="Block" pageNumber=@Model.PageNumber fail_delete="@ViewBag.fail_delete" numberbtn="@(numberbtn)" />
+
 
             </div>
 
@@ -56,19 +59,20 @@
                             @*//comment*@
                             <textarea class="commentText" readonly>@comment.text</textarea>
 
+
+                            <input type="submit" class="button button2" id="blockC" commentId="@comment.Id" value="Block" pageNumber=@Model.PageNumber fail_delete="@ViewBag.fail_delete" numberbtnC="@(numberbtnC)" />
+
+
                         </div>
 
-                        @*place to show the view of EditComment
-                            Do not touch the variable id="EditPost" and class="popup" inside a tag div*@
-                        <div id="EditComment" class="popup"></div>
-
+                        numberbtnC++;
                     }
 
                 }
             </div>
 
             @*place to show the view of NewComment
-                Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
+            Do not touch the variable id="NewComment" and class="popup" inside a tag div*@
             <div id="NewComment" class="popup"></div>
 
 
@@ -82,7 +86,7 @@
             <div class="pagination" style="margin-left: 400px">
 
                 @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
-                    asp-route-isAuthenticated="true" inside a tag a*@
+                asp-route-isAuthenticated="true" inside a tag a*@
 
                 @if (Model.PageNumber > 1)
                 {
