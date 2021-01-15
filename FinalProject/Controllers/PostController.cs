@@ -57,7 +57,7 @@ namespace FinalProject.Controllers
 
                 _postService.addUserToBlockList(postId, user.email);
 
-                if (_postService.checkBlockList(postId) == 200 || _postService.checkBlockList(postId)== Math.Round(_userService.getUserList().Count *0.5 ))
+                if (_postService.checkBlockList(postId) == 200 || _postService.checkBlockList(postId) ==  (int)(_userService.getUserList().Count *0.5) )
                 {
                     _postService.removePost(postId);
                     ViewBag.fail_delete = "false";
@@ -69,7 +69,7 @@ namespace FinalProject.Controllers
             {
                 _commentService.addUserToBlockList(commentId, HttpContext.Session.GetString("Mail"));
 
-                if (_commentService.checkBlockList(commentId) == 200 || _commentService.checkBlockList(commentId) == Math.Round(_userService.getUserList().Count * 0.5))
+                if (_commentService.checkBlockList(commentId) == 200 || _commentService.checkBlockList(commentId) == (int)(_userService.getUserList().Count * 0.5))
                 {
 
                     foreach (var post in _postService.getPostList().Where(x => x.comList != null))
