@@ -38,7 +38,7 @@ namespace FinalProject.Controllers
 
             int totalpostPerPage = _postService.getPostList().ToPagedList(pageNumber, pageSize).Count;
 
-            if (totalpostPerPage == 0 && totalPages != 1)
+            if (totalpostPerPage == 0 && totalPages >= 1)
                 pageNumber = totalPages;
 
 

@@ -3,10 +3,10 @@
 <body>
 
     <div class="container">
-
-        <a asp-action="SignUp">SignUp</a>
-        <a asp-action="SignIn">SignIn</a>
-
+        <div class="box">
+            <a asp-action="SignUp">SignUp</a>
+            <a asp-action="SignIn">SignIn</a>
+            </div>
         <form asp-action="SignUp">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -29,10 +29,11 @@
             <label asp-for="confirmPassword"><b>Confirm Password</b></label>
             <input asp-for="confirmPassword" type="password" placeholder="Please confirm password" required />
             <span asp-validation-for="confirmPassword" class="text-danger"></span>
-
-            <button class="SignUpbtn" type="submit">SignUp</button>
+            <div class="box2">
+                <button class="SignUpbtn" type="submit">SignUp</button>
+                </div>
         </form>
-    </div>
+        </div>
 </body>
 
 

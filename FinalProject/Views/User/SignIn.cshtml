@@ -3,12 +3,12 @@
 
 <body>
     
-    <div class="container">
-        <div class="box">
+    <div class="container2">
+        <div class="box3">
             <a asp-action="SignUp" ><i>SignUp</i></a>
             <a asp-action="SignIn"><i>SignIn</i></a>
         </div>
-        <div class="box2">
+       
             <form asp-action="SignIn">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <label asp-for="email"></label>
@@ -19,9 +19,10 @@
                 <label asp-for="password"></label>
                 <input asp-for="password" type="password" placeholder="Enter Password" />
                 <span asp-validation-for="password" class="text-danger"></span>
-                <div class="box2">
+                <div class="box4">
                     <button class="SignInbtn" type="submit">SignIn</button>
                 </div>
+
                 @if (ViewBag.Fail)
                 {
                     <div>Login failed. Please try again.</div>
@@ -29,7 +30,7 @@
 
             </form>
         </div>
-    </div>
+ 
 
 </body>
 
