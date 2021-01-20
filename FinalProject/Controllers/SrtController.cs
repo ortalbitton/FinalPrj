@@ -20,9 +20,12 @@ namespace FinalProject.Controllers
         string dictionaryPath;
 
         private readonly int countSRTPerPage;
-
+        public Timing startTime;
+        public Timing endTime;
         public SrtController(SrtService srtService, UserService userService)
         {
+            startTime = new Timing();
+            endTime = new Timing();
             _srtService = srtService;
             _userService = userService;
             dictionaryPath = _srtService.getDictionaryPath();
@@ -68,8 +71,9 @@ namespace FinalProject.Controllers
             string userName = _userService.getUserByKey(email).name;
             string directoryPath = _srtService.getDirPath(VideoFile, userName);
 
-            _srtService.saveVideo(VideoFile, directoryPath);
-             ObjectId fileId = Convert(VideoFile, directoryPath);
+            string videoPath = _srtService.saveVideo(VideoFile, directoryPath);
+
+            ObjectId fileId = Convert(VideoFile, directoryPath, videoPath);
 
             //create מופע srt (לא במסד נתונים)
             Srt srt = new Srt();
@@ -92,24 +96,125 @@ namespace FinalProject.Controllers
         }
 
         public string srtPath;
-        public string videoPath;
-        public string picPath;
-        public string line;
+        public string text;
+        public string prev;
+        public string midString;
+        public int subNumber;
+        public int currentFrame;
+        public int numOfFrames;
+        public double fps;
+        public double fpsAdd;
 
-        public ObjectId Convert(IFormFile videoFile, string directoryPath)
+        public ObjectId Convert(IFormFile videoFile, string directoryPath, string videoPath)
         {
-            string text = "";
+            text = "";
+            prev = "";
+            subNumber = 1;
+            currentFrame = 0;
+            double fps = _srtService.getVidFPS(videoPath);
+            numOfFrames = _srtService.getFramesTotal(videoPath, fps);
+            int numOfJumps = 3;
+            fpsAdd = (double)numOfJumps / fps;
+
             srtPath = _srtService.getSrtPath(videoFile, directoryPath);
+            int totalFrames = _srtService.extractPic(videoFile.FileName.Replace(" ", "_"), directoryPath, numOfFrames);
 
-            //loop
-            //create picture from specific frame of video
-            _srtService.extractPic(videoFile.FileName.Replace(" ", "_"), 100, directoryPath);
+            while (currentFrame <= totalFrames)
+            {
+                text = _srtService.ExtractTextFromPic(directoryPath, currentFrame);
 
-            text = _srtService.ExtractTextFromPic(directoryPath);
+                text = _srtService.fixText(text);
 
 
-            _srtService.writeToSrt(srtPath, text);
-            //end of loop
+                currentFrame = currentFrame + numOfJumps;
+                //מקרה 1
+                //(אדום)התחלת כתובית אחרי הפסקה או בפעם הראשונה
+                if (prev == "" && text != "")
+                {
+                    _srtService.writeToSrt(srtPath, subNumber.ToString());
+                    midString = startTime.printTime() + " " + "-->";
+                    endTime.copyTime(startTime);
+                    if (!endTime.plus(fpsAdd))
+                    {
+                        //there is a problem with the time
+                        currentFrame = totalFrames + 1;
+                    }
+
+                }
+                //מקרה 2
+                //(סגול)התחלת כתובית מיד אחרי כתובית
+                else if (text != prev && text != "" && prev != "")
+                {
+                    _srtService.writeToSrt(srtPath, midString + " " + endTime.printTime());
+                    _srtService.writeToSrt(srtPath, prev);
+                    _srtService.writeToSrt(srtPath, "");
+                    subNumber++;
+                    startTime.copyTime(endTime);
+                    //we ended the previus sub
+
+                    //start the next sub
+                    _srtService.writeToSrt(srtPath, subNumber.ToString());
+                    midString = startTime.printTime() + " " + "-->";
+                    endTime.copyTime(startTime);
+                    if (!endTime.plus(fpsAdd))
+                    {
+                        //there is a problem with the time
+                        currentFrame = totalFrames + 1;
+                    }
+
+                }
+                //מקרה 3
+                //זמן ללא כתובית(כתום)
+                else if (text == "" && prev == "")
+                {
+                    if (!startTime.plus(fpsAdd))
+                    {
+                        //there is a problem with the time
+                        currentFrame = totalFrames + 1;
+                    }
+                    if (!endTime.plus(fpsAdd))
+                    {
+                        //there is a problem with the time
+                        currentFrame = totalFrames + 1;
+                    }
+
+                }
+                //מקרה 4
+                //(ירוק)סיום כתובית ולא התחלה של כתובית
+                else if (text == "" && prev != "")
+                {
+                    _srtService.writeToSrt(srtPath, midString + " " + endTime.printTime());
+                    _srtService.writeToSrt(srtPath, text);
+                    _srtService.writeToSrt(srtPath, "");
+                    subNumber++;
+                    startTime.copyTime(endTime);
+                    if (!endTime.plus(fpsAdd))
+                    {
+                        //there is a problem with the time
+                        currentFrame = totalFrames + 1;
+                    }
+                    //end prev sub
+
+                }
+                //מקרה 5
+                //המשך של אותה כתובית(כחול במצגת)
+                else if (text == prev && text != "")
+                {
+                    if (!endTime.plus(fpsAdd))
+                    {
+                        //there is a problem with the time
+                        currentFrame = totalFrames + 1;
+                    }
+                }
+
+                prev = text;
+            }
+            //אם הכתוביות האחרונות עד סוף הסרט
+            if (text != "")
+            {
+                _srtService.writeToSrt(srtPath, midString + " " + endTime.printTime());
+                _srtService.writeToSrt(srtPath, text);
+            }
 
             //save in GridFSBucket
             ObjectId fileId = _srtService.saveSRTBucket(srtPath);

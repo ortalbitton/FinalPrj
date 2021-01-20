@@ -34,10 +34,9 @@ namespace FinalProject.Services
             _users = database.GetCollection<User>("users");
 
         }
-
-        public string ExtractTextFromPic(String directoryPath)
+        public string ExtractTextFromPic(String directoryPath, int frameNum)
         {
-            string image = directoryPath + "thumb.jpeg";
+            string image = directoryPath + "thumb" + frameNum + ".jpg";
             string tessPath = _env.ContentRootPath + "/wwwroot/tessdata/";
             string result = "";
 
@@ -67,29 +66,72 @@ namespace FinalProject.Services
             return directoryPath + nameOfSrt;
         }
 
-        public void extractPic(string videoName, int frameNumber, string directoryPath)
+        public int extractPic(string videoName, string dirPath, int numOfFrames)
         {
 
-            Process myProcess = new Process();
-            //argument - the command
-            //workingDirectory - where to save the picture
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = _env.ContentRootPath + "/wwwroot/ffmpeg/ffmpeg.exe",
-                Arguments = "-y -i " + videoName + " -vf select='eq(n," + frameNumber + ")' -vsync vfr " + directoryPath + "thumb.jpeg",
-                WorkingDirectory = directoryPath,
-                CreateNoWindow = true,
-                UseShellExecute = false
+            // 1) Create Process Info
+            var psi = new ProcessStartInfo();
+            psi.FileName = @"C:\Program Files\Python39\python.exe";
 
-            };
+            // 2) Provide script and arguments
 
-            using (var process = new Process { StartInfo = startInfo })
+            var script = _env.ContentRootPath + "/wwwroot/python/extractPic.py";
+            var directoryPath = dirPath;
+            var name = videoName;
+
+
+            psi.Arguments = $"\"{script}\" \"{directoryPath}\" \"{name}\" \"{numOfFrames}\"";
+
+            // 3) Process configuration
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+
+            // 4) Execute process and get output
+            var errors = "";
+            var totalFrames = "";
+
+            using (var process = Process.Start(psi))
             {
-                process.Start();
-                process.WaitForExit();
+                errors = process.StandardError.ReadToEnd();
+                totalFrames = process.StandardOutput.ReadToEnd();
             }
 
+            if (errors != "")
+            {
+                return -1;
+            }
+            totalFrames = totalFrames.Replace("0\r\n", "");
+            totalFrames = totalFrames.Replace("\r\n", "");
+            return Int32.Parse(totalFrames);
         }
+
+        public string fixText(string text)
+        {
+            string mid;
+            if (text != "")
+            {
+                text = text.ToLowerInvariant();
+                
+                mid = text.Substring(0, 2);
+                while (mid == "\n")
+                {
+                    text = mid;
+                    mid = text.Substring(0, 2);
+                }
+
+                mid = text.Substring(text.Length - 2, 2);
+                while (mid == "\n")
+                {
+                    text = mid;
+                    mid = text.Substring(mid.Length - 2, 2);
+                }
+                text = text.Replace("‘", "'");
+            }
+            return text;
+        }
+
 
         public void writeToSrt(string srtPath, string text)
         {
@@ -119,15 +161,16 @@ namespace FinalProject.Services
             return directoryPath;
         }
 
-        public void saveVideo(IFormFile videoFile, string directoryPath)
+        public string saveVideo(IFormFile videoFile, string directoryPath)
         {
+
+            string videoName = videoFile.FileName.Replace(" ", "_");
+
+            //save video in the new directory
+            string UploadPath = directoryPath + videoName;//+ "/"
+
             try
             {
-                string videoName = videoFile.FileName.Replace(" ", "_");
-
-                //save video in the new directory
-                string UploadPath = directoryPath + "/" + videoName;
-
                 using (var stream = new FileStream(UploadPath, FileMode.Create))
                 {
                     videoFile.CopyTo(stream);
@@ -137,6 +180,8 @@ namespace FinalProject.Services
             {
                 Console.WriteLine(e.Message);
             }
+
+            return UploadPath;
         }
 
         public string getDictionaryPath()
@@ -145,6 +190,44 @@ namespace FinalProject.Services
 
             return path;
         }
+
+        public int getFramesTotal(string videoPath, double fps)
+        {
+            string duration = "";
+            double totalFrames = 0;
+
+
+            string ffprobPath = _env.ContentRootPath + "/wwwroot/ffmpeg/";
+            var ffProbe = new NReco.VideoInfo.FFProbe();
+            ffProbe.ToolPath = ffprobPath;
+            var videoInfo = ffProbe.GetMediaInfo(videoPath);
+
+            duration = videoInfo.Duration.ToString();
+
+            string[] time = duration.Split(':', '.');
+
+            totalFrames += Convert.ToInt32(time[0]) * 3600 * fps;
+            totalFrames += Convert.ToInt32(time[1]) * 60 * fps;
+            totalFrames += Convert.ToInt32(time[2]) * fps;
+            totalFrames += (Convert.ToInt32(time[3]) / 10000);
+
+            return Convert.ToInt32(totalFrames);
+        }
+
+        public double getVidFPS(string VideoPath)
+        {
+            string ffprobPath = _env.ContentRootPath + "/wwwroot/ffmpeg/ffprob.exe";
+
+            var ffprob = new NReco.VideoInfo.FFProbe();
+            ffprob.ToolPath = _env.ContentRootPath + "/wwwroot/ffmpeg/";
+
+            var videoInfo = ffprob.GetMediaInfo(VideoPath);
+            float fps = videoInfo.Streams[0].FrameRate;
+
+            return Convert.ToDouble(fps);
+            
+        }
+
 
 
         public List<string> getCategoryList(string dictionaryPath)
