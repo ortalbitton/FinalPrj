@@ -2,12 +2,12 @@
     font-family: Arial, Helvetica, sans-serif;
     width: 50%; /* Full width */
     height: 75%; /* Full height */
-    margin: 5% auto 15% auto;
+    /*margin: 5% auto 15% auto;*/
    
 }
 
 form {
-    border: 3px solid #f1f1f1;
+    border: 3px solid none;
 }
 
 input[type=text], input[type=password] {
@@ -60,12 +60,13 @@ input[type=text], input[type=password] {
     margin: 24px 0 12px 0;
 }
 
-.container {
+.signup {
     border: none;
     background-color: none;
     opacity: 0.75;
     position: relative;
-    left: 50%;
+    left: 90%;
+    margin-top: 20%;
 }
 
 span.psw {

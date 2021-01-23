@@ -1,46 +1,86 @@
 ﻿
 #editbutton {
     border: none;
-    color: white;
-    padding: 16px 32px;
+    color: black;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
-    margin: 0.5px 1px;
+    font-size: small;
     transition-duration: 0.4s;
     cursor: pointer;
     overflow: hidden;
     resize: none;
-    margin-top: 40px;
-    height: 80px;
-    background-color: white;
+    margin-top: 40%;
+    height: 80%;
+    background-color: #af8ac9;
     color: black;
-    border: 2px solid #4CAF50;
-    border-radius: 4px;
 }
+    #editbutton:hover {
+        background-color: purple;
+        color: white;
+    }
 
 #tweet-body {
     width: 82%;
-    margin-left: 60px;
+    margin-left: 60%;
 }
-
+/*new post tab*/
     #tweet-body .postText {
         overflow: hidden;
-        /* resize: none; */
-        margin-top: 40px;
-        margin-left: 40px;
-        height: 100px;
-        border: 3px solid #4CAF50;
+        margin-left: 45%;
+        position:relative;
+        height: 200%;
+        border: 3px solid #e5c11d;
         border-radius: 4px;
-        padding: 100px;
-        font-size: 16px;
+        font-size: large;
         font-family: Arial;
         /*position: absolute;*/
         width: 50%;
+        padding: 10%;
+    }
+    #tweet-body .commentText {
+        overflow: hidden;
+        margin-left: 50%;
+        height: 200%;
+        border: 3px solid #e5c11d;
+        border-radius: 4px;
+        font-size: large;
+        font-family: Arial;
+        /*position: absolute;*/
+        width: 50%;
+        padding: 5%;
+    }
+#tweet-body2 {
+    width: 82%;
+    margin-left: 60%;
+}
+    /*new post tab*/
+    #tweet-body2 .postText {
+        overflow: hidden;
+        margin-left: -70%;
+        height: 200%;
+        border: 3px solid #dede89;
+        border-radius: 4px;
+        font-size: large;
+        font-family: Arial;
+        /*position: absolute;*/
+        width: 50%;
+        padding: 10%;
     }
 
+    #tweet-body2 .commentText {
+        overflow: hidden;
+        margin-left: -70%;
+        height: 200%;
+        border: 3px solid #dede89;
+        border-radius: 4px;
+        font-size: large;
+        font-family: Arial;
+        /*position: absolute;*/
+        width: 50%;
+        padding: 10%;
+    }
 .UserNamePE {
     position: absolute;
-    margin-left: 40px;
+    margin-left: 60%;
 }

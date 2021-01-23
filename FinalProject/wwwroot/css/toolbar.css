@@ -2,23 +2,28 @@
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
-    
+    position:center;
 }
 
 .topnav {
     overflow: hidden;
-    background-color:#f2f2f2;
-    color:black;
+    background-color: #f2f2f2;
+    color: black;
+    width: 200%;
+    position: relative;
+    /*left: -50%;*/
+    top: 1%;
+    opacity: 0.90;
+    height:20%
 }
 
     .topnav a {
-        float: left;
+        /*float: left;*/
         color: black;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;
-        
     }
 
         .topnav a:hover {
@@ -27,7 +32,7 @@
         }
 
         .topnav a.active {
-            background-color: #e5c11d;
+            background-color: #f2f2f2;
             color: white;
         }
 
@@ -37,5 +42,11 @@
         float: right;
       
     }
+
+img {
+   height:10%;
+   width:8%;
+   /*margin-left:2%;*/
+}
 
 

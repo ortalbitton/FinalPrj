@@ -1,38 +1,37 @@
-﻿.button {
-    border: none;
-    color: white;
-    padding: 16px 32px;
+﻿
+.button {
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 0.5px 1px;
+    font-size: large;
     transition-duration: 0.4s;
-    cursor: pointer;
     overflow: hidden;
     resize: none;
-    margin-top: 40px;
-    height: 80px;
 }
 
 .button1 {
-    background-color: white;
+    background-color: gainsboro;
     color: black;
-    border: 2px solid #4CAF50;
-    border-radius: 4px;
+    border: 2px solid #e5c11d;
+    border-radius: 5%;
+    width: 20%;
+    left: 100%;
+    /*position: relative;*/
 }
 
     .button1:hover {
-        background-color: #4CAF50;
+        background-color: #e5c11d;
         color: white;
     }
 
 .button2 {
-    padding: 20px 20px;
-    background-color: white;
-    color: gray;
-    border: 0px solid;
+    background-color: #af8ac9;
+    color: black;
+    border: 2px solid gainsboro;
     border-radius: 4px;
+    margin-left: 105%;
+    width: 20%;
+    height: 10%;
+    font-size:small;
 }
 
     .button2:hover {
@@ -44,41 +43,6 @@
     .button2.style {
         pointer-events: none;
         background-color: gainsboro;
-    }
-
-
-#tweet-body {
-    width: 82%;
-    margin-left: 60px;
-}
-
-    #tweet-body .postText {
-        overflow: hidden;
-        /* resize: none; */
-        margin-top: 40px;
-        margin-left: 20%;
-        height: 100px;
-        border: 3px solid #4CAF50;
-        border-radius: 4px;
-        padding: 100px;
-        font-size: 16px;
-        font-family: Arial;
-        /*position: absolute;*/
-        width: 50%;
-    }
-
-    #tweet-body .commentText {
-        overflow: hidden;
-        /* resize: none; */
-        margin-top: 40px;
-        height: 100px;
-        border: 3px solid #4CAF50;
-        border-radius: 4px;
-        /*padding: 100px;*/
-        font-size: 16px;
-        font-family: Arial;
-        width: 60%;
-        margin-left: 20%;
     }
 
 
@@ -102,23 +66,27 @@
 
 
 .postUserName {
-    position: absolute;
-    margin-left: 40px;
+    position: relative;
+    margin-left: 50%;
+    color: black;
+    text-shadow: 3px 3px 7px #af8ac9;
 }
 
 .commentUserName {
-    position: absolute;
-    margin-left: 11%;
+    position: relative;
+    margin-left: 50%;
+    color: black;
+    text-shadow: 3px 3px 7px #af8ac9;
 }
 
-#newP{
+/*#newP{
     margin-bottom:0px;
 
-}
+}*/
 
-#newPost {
+/*#newPost {
     margin-bottom: 5%;
-}
+}*/
 
 #PostsAndComments {
     margin-top: 5px;

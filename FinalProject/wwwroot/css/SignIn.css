@@ -9,7 +9,7 @@
 }
 
 form {
-    border: 3px solid #f1f1f1;
+    border: none;
 }
 
 input[type=text], input[type=password] {
@@ -25,7 +25,7 @@ input[type=text], input[type=password] {
     border: none;
     cursor: pointer;
     width: 35%;
-  left:300%;
+    left:300%;
     font-size: large;
 }
 
@@ -40,12 +40,13 @@ input[type=text], input[type=password] {
   
 }
 
-.container2 {
+.signin {
     border: none;
     background-color: none;
-    opacity: 1;
+    opacity: 0.75;
     position: relative;
-    left: 1%;
+    left: 90%;
+    margin-top:20%;
 }
 .box3 {
     opacity: 1;
@@ -54,7 +55,7 @@ input[type=text], input[type=password] {
     color: black;
     text-shadow: 3px 3px 7px #e5c11d;
     position: relative;
-    left: 1%;
+    left: 22%;
 }
 .box4 {
     width: 55%;
@@ -62,7 +63,7 @@ input[type=text], input[type=password] {
     font-size: larger;
     color: black;
     position: relative;
-    left: 65%;
+    left: 75%;
     border: white;
 }
 span.psw {

@@ -1,7 +1,7 @@
 ﻿@model FinalProject.Models.Comment
 
 <body>
-    <div id="tweet-body">
+    <div id="tweet-body2">
         <form asp-action="EditPost" style="border-color:transparent">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -12,11 +12,11 @@
             @*<label class="cUserName">@ViewBag.name</label>*@
 
             @*comment*@
-            <textarea class="cText" asp-for="text"></textarea>
+            <textarea class="postText" asp-for="text"></textarea>
 
 
             @*Do not touch the asp-route-pageNumberOfPost="@ViewBag.pageNumberOfPost" inside a tag button*@
-            <button type="submit" id="editbuttonC" asp-route-pageNumberOfPost="@ViewBag.pageNumberOfPost" asp-route-pageNumberOfSRT="@ViewBag.pageNumberOfSRT">Edit</button>
+            <button type="submit" id="editbutton" asp-route-pageNumberOfPost="@ViewBag.pageNumberOfPost" asp-route-pageNumberOfSRT="@ViewBag.pageNumberOfSRT">Edit</button>
 
             @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" and asp-route-isAuthenticated="true" inside a tag a*@
             <button asp-action="Profile" asp-controller="User" id="editbutton"

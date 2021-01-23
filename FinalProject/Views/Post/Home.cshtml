@@ -4,7 +4,7 @@
 
 <body>
 
-    <div id="newP" class="container">
+    <div id="newP">
 
         @* event click to show the view of NewPost
             Do not touch the variable id="newPostbtn" inside a tag input  *@
@@ -16,7 +16,7 @@
     </div>
 
     @*Do not touch the variable id="PostsAndComments" inside a tag div  *@
-    <div id="PostsAndComments" class="container">
+    <div id="PostsAndComments" >
 
         @{int numberbtn = 0 , numberbtnC = 0;}
         @foreach (var item in Model)
@@ -80,10 +80,10 @@
 
         }
 
-        <div id="container" style="margin-left: 20px">
+        <div style="margin-left: 20%">
             <p></p>
             <p></p>
-            <div class="pagination" style="margin-left: 400px">
+            <div class="pagination" style="margin-left: 400%">
 
                 @*Do not touch the variable asp-action="Home",asp-route-pageNumber="@(Model.PageNumber - 1)" ,
                 asp-route-isAuthenticated="true" inside a tag a*@

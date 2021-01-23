@@ -5,7 +5,7 @@
         ViewData["Title"] = "SearchSRT";
     }
 
-    <div class="container">
+    <div>
 
 
         @*Do not touch the variable id="status" *@
@@ -14,7 +14,7 @@
         <button id="search" type="submit" class="btnSearch btnSearch1">Search</button>
 
 
-        <input id="chooseC" type="button" class="btnSearch btnSearch1" value="Choose category" />
+        <input id="chooseC" type="button" class="btnSearch btnSearch2" value="Choose category" />
         <br />     <br />     <br />
         <div id="categoryNames" class="popup">
             @foreach (var item in ViewBag.categoryNames)
@@ -26,12 +26,11 @@
 
         <br />     <br />     <br />
 
-
-        @if (ViewBag.fail)
-        {
-            <div>no result</div>
-        }
-
+           @if (ViewBag.fail)
+                {
+             <div style="margin-left:100%;color:red">no result!</div>
+                }
+                   
         <div id="SRTList">
 
             @foreach (var item in Model)

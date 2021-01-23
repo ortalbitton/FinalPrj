@@ -9,7 +9,7 @@
             <textarea asp-for="text" placeholder="Write your post here!" rows="4" cols="50" class="status"></textarea>
             <span asp-validation-for="text" class="text-danger"></span>
         </div>
-        <div class="container">
+        <div>
             @*Do not touch the asp-route-pageNumber="@ViewBag.pageNumber" inside a tag button*@
             <button type="submit" class="button postbtn" asp-route-pageNumber="@ViewBag.pageNumber">Post</button>
         </div>
