@@ -22,14 +22,14 @@
 
         <div id="selectkey" class="popup">
 
-            <h1>Categories</h1>            
+            <h1>Categories</h1>
 
             @for (int i = 0; i < Model.Count(); i++)
             {
 
                 @*Do not touch @Html.DisplayFor(m => m[i].Text) and  @Html.CheckBoxFor(m => m[i].Selected) *@
-                <h2>@Html.DisplayFor(m => m[i].Text)   @Html.CheckBoxFor(m => m[i].Selected,new { id="checkBox" })</h2>
-               
+                <h2>@Html.DisplayFor(m => m[i].Text)   @Html.CheckBoxFor(m => m[i].Selected, new { id = "checkBox" })</h2>
+
 
                 @*Do not touch because it's used to transfer the selected name to SrtController *@
                 @Html.HiddenFor(m => m[i].Text)
@@ -46,5 +46,19 @@
     </form>
 
     <input type="submit" class="btnSRT btnSRT2" id="next" value="Next" />
+
+    @if (ViewBag.fail)
+    {
+        <div id="error-process"> <label>the process convert has failed</label></div>
+        
+    }
+    else if (ViewBag.data == "success")
+    {
+        <div id="error-process"> <label>the process has ended successfully</label></div>
+     
+    }
+
+
+
 
 </div>

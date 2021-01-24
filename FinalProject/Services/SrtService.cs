@@ -71,7 +71,7 @@ namespace FinalProject.Services
 
             // 1) Create Process Info
             var psi = new ProcessStartInfo();
-            psi.FileName = @"C:\python\Python391\python.exe";
+            psi.FileName = @"C:\Program Files\Python39\python.exe";
 
             // 2) Provide script and arguments
 
@@ -97,7 +97,7 @@ namespace FinalProject.Services
                 errors = process.StandardError.ReadToEnd();
                 totalFrames = process.StandardOutput.ReadToEnd();
             }
-
+            //errors = "ss";
             if (errors != "")
             {
                 return -1;

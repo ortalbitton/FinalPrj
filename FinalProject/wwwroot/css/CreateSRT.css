@@ -109,3 +109,8 @@
     height: 50%;
     width: 100%;
 }
+
+#error-process {
+    margin-left: 100%;
+    width: 75%;
+}

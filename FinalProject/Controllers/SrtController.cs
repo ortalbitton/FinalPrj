@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using FinalProject.HelpClasses;
 using FinalProject.Models;
 using FinalProject.Services;
 using Microsoft.AspNetCore.Http;
@@ -36,6 +37,9 @@ namespace FinalProject.Controllers
         public IActionResult CreateSRT(bool? isAuthenticated)
         {
             ViewBag.isAuthenticated = isAuthenticated;
+
+            ViewBag.fail = false;
+            ViewBag.data = "";
 
             List<SelectListItem> categoryList = new List<SelectListItem>();
             string[] categorys = _srtService.getCategoryList(dictionaryPath).ToArray();//get from dictionary
@@ -73,24 +77,39 @@ namespace FinalProject.Controllers
 
             string videoPath = _srtService.saveVideo(VideoFile, directoryPath);
 
-            ObjectId fileId = Convert(VideoFile, directoryPath, videoPath);
 
-            //create מופע srt (לא במסד נתונים)
-            Srt srt = new Srt();
-            srt.name = Path.GetFileNameWithoutExtension(VideoFile.FileName);
-            srt.date = DateTime.Now.ToString();
-            srt.fileId = fileId.ToString();
+            string fileId = Convert(VideoFile, directoryPath, videoPath);
 
-            //save srt in json file
-            _srtService.setCategory(selected, srt, dictionaryPath);
+            if (fileId == "")
+            {
+                ViewBag.fail = true;
+                ViewBag.isAuthenticated = true;
+                
+                return View(categoryList);
 
-            //הוספת הקובץ לרשימת הקבצים של המשתמש
-            _srtService.addSRTToUser(HttpContext.Session.GetString("Mail"), srt);
+            }
+            else
+            {
+                //create מופע srt (לא במסד נתונים)
+                Srt srt = new Srt();
+                srt.name = Path.GetFileNameWithoutExtension(VideoFile.FileName);
+                srt.date = DateTime.Now.ToString();
+                srt.fileId = fileId;
+                ViewBag.fail = false;
+                //save srt in json file
+                _srtService.setCategory(selected, srt, dictionaryPath);
 
-            ViewBag.isAuthenticated = true;
+                //הוספת הקובץ לרשימת הקבצים של המשתמש
+                _srtService.addSRTToUser(HttpContext.Session.GetString("Mail"), srt);
 
-            return View(categoryList);
+                ViewBag.isAuthenticated = true;
 
+                ViewBag.data = "success";
+                return View(categoryList);
+
+            }
+
+            
 
             //return View();
         }
@@ -105,7 +124,7 @@ namespace FinalProject.Controllers
         public double fps;
         public double fpsAdd;
 
-        public ObjectId Convert(IFormFile videoFile, string directoryPath, string videoPath)
+        public string Convert(IFormFile videoFile, string directoryPath, string videoPath)
         {
             text = "";
             prev = "";
@@ -118,6 +137,8 @@ namespace FinalProject.Controllers
 
             srtPath = _srtService.getSrtPath(videoFile, directoryPath);
             int totalFrames = _srtService.extractPic(videoFile.FileName.Replace(" ", "_"), directoryPath, numOfFrames);
+            //totalFrames = -1;
+            string fileId;
 
             while (currentFrame <= totalFrames)
             {
@@ -137,7 +158,7 @@ namespace FinalProject.Controllers
                     if (!endTime.plus(fpsAdd))
                     {
                         //there is a problem with the time
-                        currentFrame = totalFrames + 1;
+                        totalFrames = -1;
                     }
 
                 }
@@ -159,7 +180,7 @@ namespace FinalProject.Controllers
                     if (!endTime.plus(fpsAdd))
                     {
                         //there is a problem with the time
-                        currentFrame = totalFrames + 1;
+                        totalFrames = -1;
                     }
 
                 }
@@ -170,12 +191,12 @@ namespace FinalProject.Controllers
                     if (!startTime.plus(fpsAdd))
                     {
                         //there is a problem with the time
-                        currentFrame = totalFrames + 1;
+                        totalFrames = -1;
                     }
                     if (!endTime.plus(fpsAdd))
                     {
                         //there is a problem with the time
-                        currentFrame = totalFrames + 1;
+                        totalFrames = -1;
                     }
 
                 }
@@ -191,7 +212,7 @@ namespace FinalProject.Controllers
                     if (!endTime.plus(fpsAdd))
                     {
                         //there is a problem with the time
-                        currentFrame = totalFrames + 1;
+                        totalFrames = -1;
                     }
                     //end prev sub
 
@@ -203,7 +224,7 @@ namespace FinalProject.Controllers
                     if (!endTime.plus(fpsAdd))
                     {
                         //there is a problem with the time
-                        currentFrame = totalFrames + 1;
+                        totalFrames = -1;
                     }
                 }
 
@@ -216,8 +237,17 @@ namespace FinalProject.Controllers
                 _srtService.writeToSrt(srtPath, text);
             }
 
-            //save in GridFSBucket
-            ObjectId fileId = _srtService.saveSRTBucket(srtPath);
+            if (totalFrames == -1)
+            {
+                fileId = "";
+            }
+            else
+            {
+
+                //save in GridFSBucket
+                 fileId = _srtService.saveSRTBucket(srtPath).ToString();
+            }
+            
 
             //delete folder
             _srtService.deleteDir(directoryPath);
