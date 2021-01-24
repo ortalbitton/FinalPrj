@@ -58,7 +58,7 @@
     border: 0px solid black;
     border-radius: 4px;
     margin-left: 125%;
-    margin-top:1%;
+    margin-top: 1%;
     width: 15%;
     height: 20%;
     text-align: center;
@@ -67,8 +67,8 @@
     .btnPro2:hover {
         background-color: purple;
         color: white;
-       
     }
+
 .btnPro3 {
     background-color: #af8ac9;
     color: black;
@@ -112,7 +112,7 @@
     position: absolute;
     margin-left: 41%;
     margin-top: -2%;
-    font-size:small;
+    font-size: small;
 }
 
 .popup {
@@ -131,8 +131,8 @@
     position: relative;
     left: 80%;
     margin-top: 20%;
-    
 }
+
 .mypost {
     color: black;
     font-size: larger;
@@ -140,4 +140,9 @@
     position: relative;
     left: 100%;
     margin-top: 13%;
+}
+
+#error {
+    margin-left: 100%;
+    width: 75%;
 }

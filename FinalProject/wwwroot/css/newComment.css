@@ -9,6 +9,7 @@
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 4px;
+    margin-left: 150%;
 }
 
 .commentbtn {
@@ -22,7 +23,7 @@
     margin-left: 60px;
 }
 
-    .tweet .status {
+    .tweet .status-newComment {
         overflow: hidden;
         resize: none;
         margin-top: 40px;
@@ -32,4 +33,5 @@
         padding: 10px;
         font-size: 16px;
         font-family: Arial;
+        margin-left: 120%;
     }

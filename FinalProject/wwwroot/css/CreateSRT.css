@@ -48,6 +48,10 @@
  
 }
 
+.btnConvert {
+    margin-left: 60%;
+}
+
 
 .btnSRT1:hover {
     background-color: orange;
@@ -96,3 +100,12 @@
     .popup.open {
         display: block;
     }
+
+#selectkey {
+    background-color: white;
+    color: black;
+    position: relative;
+    margin-left: 100%;
+    height: 50%;
+    width: 100%;
+}

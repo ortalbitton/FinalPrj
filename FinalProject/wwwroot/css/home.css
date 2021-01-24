@@ -46,6 +46,39 @@
     }
 
 
+#tweet-body {
+    width: 82%;
+    margin-left: 60%;
+}
+    /* post tab*/
+    #tweet-body .postText {
+        overflow: hidden;
+        margin-left: 45%;
+        position: relative;
+        height: 200%;
+        border: 3px solid #e5c11d;
+        border-radius: 4px;
+        font-size: large;
+        font-family: Arial;
+        /*position: absolute;*/
+        width: 50%;
+        padding: 10%;
+    }
+
+    #tweet-body .commentText {
+        overflow: hidden;
+        margin-left: 50%;
+        height: 200%;
+        border: 3px solid #e5c11d;
+        border-radius: 4px;
+        font-size: large;
+        font-family: Arial;
+        /*position: absolute;*/
+        width: 50%;
+        padding: 5%;
+    }
+
+
 .post.hide {
     visibility: hidden;
     height: 0px;

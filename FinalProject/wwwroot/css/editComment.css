@@ -16,26 +16,26 @@
     color: black;
 }
 
-#tweet-body {
-    
+#tweet-body2-editComment {
+    width: 82%;
+    margin-left: 60%;
 }
 
-    #tweet-body .cText {
-        overflow: hidden;
-        margin-left: 45%;
-        position: relative;
-        height: 200%;
-        border: 3px solid #e5c11d;
-        border-radius: 4px;
-        font-size: large;
-        font-family: Arial;
-        /*position: absolute;*/
-        width: 50%;
-        padding: 10%;
-    }
+#tweet-body2-editComment .cText {
+    overflow: hidden;
+    margin-left: 45%;
+    height: 200%;
+    border: 3px solid #dede89;
+    border-radius: 4px;
+    font-size: large;
+    font-family: Arial;
+    /*position: absolute;*/
+    /*width: 50%;*/
+    padding: 10%;
+}
 
 .cUserName {
-    position: absolute;
-    margin-left: 11%;
+    position: relative;
+    margin-left: 50%;
 }
 

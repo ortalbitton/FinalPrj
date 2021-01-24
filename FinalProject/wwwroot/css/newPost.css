@@ -6,7 +6,7 @@
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 4px;
-    /*left:10%;*/
+    margin-left:100%;
     background-color: white;
     color: black;
     border: 2px solid #d9bcda;
@@ -14,15 +14,24 @@
 
 .tweet-body {
     width: 100%;
-    margin-left: 60%;
+    /*margin-left: 60%;*/
     height: 80%;
     position:relative;
 }
 
-    .tweet-body .status {
+    .tweet-body .status-newPost {
         /*overflow: hidden;*/
         border: 1px solid #e5c11d;
         border-radius: 4px;
         font-size: large;
         /*position: absolute;*/
+        overflow: hidden;
+        left: 100%;
+        border-radius: 4px;
+        font-size: large;
+        font-family: Arial;
+        color: black;
+        position: relative;
+        margin: auto;
+        margin-top: 10%;
     }

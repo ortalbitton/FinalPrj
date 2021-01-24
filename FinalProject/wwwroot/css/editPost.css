@@ -10,46 +10,20 @@
     cursor: pointer;
     overflow: hidden;
     resize: none;
-    margin-top: 40%;
+    /*margin-top: 40%;*/
     height: 80%;
     background-color: #af8ac9;
     color: black;
+    margin-left: 125%;
+    margin-top: 1%;
+    text-align: center;
 }
     #editbutton:hover {
         background-color: purple;
         color: white;
     }
 
-#tweet-body {
-    width: 82%;
-    margin-left: 60%;
-}
-/*new post tab*/
-    #tweet-body .postText {
-        overflow: hidden;
-        margin-left: 45%;
-        position:relative;
-        height: 200%;
-        border: 3px solid #e5c11d;
-        border-radius: 4px;
-        font-size: large;
-        font-family: Arial;
-        /*position: absolute;*/
-        width: 50%;
-        padding: 10%;
-    }
-    #tweet-body .commentText {
-        overflow: hidden;
-        margin-left: 50%;
-        height: 200%;
-        border: 3px solid #e5c11d;
-        border-radius: 4px;
-        font-size: large;
-        font-family: Arial;
-        /*position: absolute;*/
-        width: 50%;
-        padding: 5%;
-    }
+
 #tweet-body2 {
     width: 82%;
     margin-left: 60%;
@@ -57,30 +31,18 @@
     /*new post tab*/
     #tweet-body2 .postText {
         overflow: hidden;
-        margin-left: -70%;
+        margin-left: 45%;
         height: 200%;
         border: 3px solid #dede89;
         border-radius: 4px;
         font-size: large;
         font-family: Arial;
         /*position: absolute;*/
-        width: 50%;
+        /*width: 50%;*/
         padding: 10%;
     }
 
-    #tweet-body2 .commentText {
-        overflow: hidden;
-        margin-left: -70%;
-        height: 200%;
-        border: 3px solid #dede89;
-        border-radius: 4px;
-        font-size: large;
-        font-family: Arial;
-        /*position: absolute;*/
-        width: 50%;
-        padding: 10%;
-    }
 .UserNamePE {
-    position: absolute;
-    margin-left: 60%;
+    position: relative;
+    margin-left: 50%;
 }
