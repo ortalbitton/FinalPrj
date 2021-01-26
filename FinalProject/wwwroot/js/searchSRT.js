@@ -44,5 +44,12 @@ for (var i = 0; i < allSearchB.length; i++) {
     });
 }
 
+// hide part of view of categoryNames
+$(document).mouseup(function (e) {
+    var a = $("#chooseC");
+    if (!a.is(e.target) && a.has(e.target).length === 0 ) {
+        $("#categoryNames").removeClass('open');
+    }
+});
 
 

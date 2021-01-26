@@ -6,6 +6,7 @@
 #SRTList {
     float: left;
     position: absolute;
+    width: 35%;
     margin: 6% auto 15% 3%;
 }
 
@@ -18,7 +19,7 @@
 
 #tweet-body-post {
     width: 82%;
-    margin-left: 60%;
+    margin-left: 55%;
 }
 
     #tweet-body-post .postText {
@@ -126,7 +127,7 @@
 
 .mysrt {
     color: black;
-    font-size: larger;
+    font-size: large;
     border: none;
     position: relative;
     left: 80%;

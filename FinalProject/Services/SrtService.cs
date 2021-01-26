@@ -71,7 +71,7 @@ namespace FinalProject.Services
 
             // 1) Create Process Info
             var psi = new ProcessStartInfo();
-            psi.FileName = @"C:\Program Files\Python39\python.exe";
+            psi.FileName = @"C:\Users\Owner\AppData\Local\Programs\Python\Python37\python.exe";
 
             // 2) Provide script and arguments
 
