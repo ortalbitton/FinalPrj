@@ -38,13 +38,30 @@
   ],
   "action": [],
   "horror": [],
-  "historical": [],
-  "drama": [],
+  "historical": [
+    {
+      "name": "Gal Gadot Speaking Hebrew - The Truth About Israel And Anti-Semitism",
+      "date": "27/01/2021 16:28:48",
+      "fileId": "6011789c913addbf15bff85b"
+    }
+  ],
+  "drama": [
+    {
+      "name": "Gal Gadot Speaking1080",
+      "date": "27/01/2021 16:21:03",
+      "fileId": "601176cc913addbf15bff859"
+    }
+  ],
   "reality": [
     {
       "name": "there is a girl..    Spoken Word",
       "date": "26/01/2021 13:05:15",
       "fileId": "600ff76755687d5f971b5715"
+    },
+    {
+      "name": "Gal Gadot Speaking1080",
+      "date": "26/01/2021 23:02:56",
+      "fileId": "6010837e6856cde6f43f5e71"
     }
   ],
   "food": [],

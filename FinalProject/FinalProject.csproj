@@ -42,7 +42,7 @@
     <None Include="Views\Post\EditPost.cshtml" />
     <None Include="Views\Post\Home.cshtml" />
     <None Include="Views\Post\NewPost.cshtml" />
-    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Srt\Error.cshtml" />
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />

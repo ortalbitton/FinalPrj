@@ -6,7 +6,7 @@ $("#createSRT").click(function () {
 
 });
 
-
+var size = 0;
 
 $("#VideoFile").change(function () {
 
@@ -15,14 +15,26 @@ $("#VideoFile").change(function () {
     //this.files[0].size gets the size of your file.
     if (this.files[0].size > 2147483647) {
         document.getElementById("sizelimit").innerHTML = "the file is too large";
+        $("#next").hide();
     }
+
+    size = this.files[0].size;
 
 });
 
 $("#next").click(function () {
-    $("#selectkey").addClass('open');
-    $("#inputfile").hide();
-    $("#next").hide();
+
+    if (size == 0) {
+        alert("the file is empty");
+        $("#selectkey").removeClass('open');
+        $("#inputfile").show();
+    }
+    else {
+        $("#selectkey").addClass('open');
+        $("#inputfile").hide();
+
+    }
+
 });
 
 //the user can not selectkey more than three key(CategoryName)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -293,12 +294,24 @@ namespace FinalProject.Controllers
 
 
 
+
         public IActionResult Download(string fileName, string fileId)
         {
 
             byte[] fileContent = _srtService.Download(ObjectId.Parse(fileId));
+        
+            if(fileContent==null)
+                return RedirectToAction("Error", "Srt");
+            else
+                return File(fileContent, "text/plain", fileName);
+        }
 
-            return File(fileContent, "text/plain", fileName);
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error(bool? isAuthenticated)
+        {
+            ViewBag.isAuthenticated = true;
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

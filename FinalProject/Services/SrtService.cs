@@ -372,10 +372,21 @@ namespace FinalProject.Services
         }
 
 
+        byte[] content;
         public byte[] Download(ObjectId fileId)
         {
 
-            byte[] content = bucket.DownloadAsBytesAsync(fileId).Result;
+            var filter = Builders<GridFSFileInfo<ObjectId>>
+                                  .Filter.Eq(x => x.Id, fileId);
+
+            var searchResult = bucket.FindAsync(filter);
+
+            var fileEntry = searchResult.Result.SingleOrDefault();
+
+            if (fileEntry == null)
+                content = null;
+            else
+                content = bucket.DownloadAsBytesAsync(fileId).Result;
 
             return content;
 
