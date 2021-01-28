@@ -5,60 +5,68 @@
 
 <div>
 
-    <form asp-action="CreateSRT" enctype="multipart/form-data">
-
-        <div id="inputfile">
-            <label class="textarea">
-                <label id="namefile">Please choose a video</label>
-            </label>
-            <label for="VideoFile" class="btnSRT btnSRT1">Choose video</label>
-
-            <label id="sizelimit"></label>
-
-            @*Do not touch a tag input because it's used to transfer VideoFile to SrtController *@
-            <input id="VideoFile" name="VideoFile" type="file" class="inputfile" />
-
-        </div>
-
-        <div id="selectkey" class="popup">
-
-            <h1>Categories</h1>
-
-            @for (int i = 0; i < Model.Count(); i++)
-            {
-
-                @*Do not touch @Html.DisplayFor(m => m[i].Text) and  @Html.CheckBoxFor(m => m[i].Selected) *@
-                <h2>@Html.DisplayFor(m => m[i].Text)   @Html.CheckBoxFor(m => m[i].Selected, new { id = "checkBox" })</h2>
-
-
-                @*Do not touch because it's used to transfer the selected name to SrtController *@
-                @Html.HiddenFor(m => m[i].Text)
-
-            }
-
-            <br />
-
-
-            <button type="submit" class="btnSRT btnSRT1 btnConvert" style="position:relative">Convert</button>
-
-        </div>
-
-    </form>
-
-    <input type="submit" class="btnSRT btnSRT2" id="next" value="Next" />
-
-    @if (ViewBag.fail)
+    @if (!ViewBag.hide)
     {
-        <div id="error-process"> <label>the process convert has failed</label></div>
-        
+
+        <form asp-action="CreateSRT" enctype="multipart/form-data">
+
+            <div id="inputfile">
+                <label class="textarea">
+                    <label id="namefile">Please choose a video</label>
+                </label>
+                <label for="VideoFile" class="btnSRT btnSRT1">Choose video</label>
+
+                <label id="sizelimit"></label>
+
+                @*Do not touch a tag input because it's used to transfer VideoFile to SrtController *@
+                <input id="VideoFile" name="VideoFile" type="file" class="inputfile" />
+
+            </div>
+
+            <div id="selectkey" class="popup">
+
+                <h1>Categories</h1>
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+
+                    @*Do not touch @Html.DisplayFor(m => m[i].Text) and  @Html.CheckBoxFor(m => m[i].Selected) *@
+                    <h2>@Html.DisplayFor(m => m[i].Text)   @Html.CheckBoxFor(m => m[i].Selected, new { id = "checkBox" })</h2>
+
+
+                    @*Do not touch because it's used to transfer the selected name to SrtController *@
+                    @Html.HiddenFor(m => m[i].Text)
+
+                }
+
+                <br />
+
+
+                <button type="submit" class="btnSRT btnSRT1 btnConvert" style="position:relative">Convert</button>
+
+            </div>
+
+        </form>
+
+        <input type="submit" class="btnSRT btnSRT2" id="next" value="Next" />
+
     }
-    else if (ViewBag.data == "success")
+    else
+
     {
-        <div id="error-process"> <label>the process has ended successfully</label></div>
-     
+
+        @if (ViewBag.fail)
+        {
+            <div id="error-process"> <label>the process convert has failed</label></div>
+
+        }
+        else if (ViewBag.data == "success")
+        {
+            <div id="error-process"> <label>the process has ended successfully</label></div>
+
+        }
+
+
     }
-
-
-
 
 </div>

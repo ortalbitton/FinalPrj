@@ -32,7 +32,7 @@ $("#next").click(function () {
     else {
         $("#selectkey").addClass('open');
         $("#inputfile").hide();
-
+        $("#next").hide();
     }
 
 });

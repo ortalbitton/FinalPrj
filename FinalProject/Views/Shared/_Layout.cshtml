@@ -37,7 +37,7 @@
                 <a class="active" asp-controller="Post" asp-action="Home" asp-route-isAuthenticated="true" asp-route-pageNumber="1" ><img src="~/images/לוגו.jpg" /></a>
                 <a id="searchSRT" asp-controller="Srt" asp-action="SearchSRT" asp-route-isAuthenticated="true" asp-route-pageNumber="1">Search for SRT</a>
                 <a asp-controller="User" asp-action="Profile" asp-route-isAuthenticated="true" asp-route-pageNumberOfSRT="1" asp-route-pageNumberOfPost="1">Profile</a>
-                <a id="createSRT" asp-controller="Srt" asp-action="CreateSRT" asp-route-isAuthenticated="true">Create SRT</a>
+                <a id="createSRT" asp-controller="Srt" asp-action="CreateSRT" asp-route-isAuthenticated="true" asp-route-fail="false" asp-route-hide="false" asp-route-data="" >Create SRT</a>
                 <a asp-controller="User" asp-action="SignOut" class="cancelbtn">SignOut</a>
             </div>
 

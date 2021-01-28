@@ -35,12 +35,14 @@ namespace FinalProject.Controllers
             countSRTPerPage = 10;
         }
 
-        public IActionResult CreateSRT(bool? isAuthenticated)
+        public IActionResult CreateSRT(bool? isAuthenticated,bool fail,bool hide,string data)
         {
             ViewBag.isAuthenticated = isAuthenticated;
 
-            ViewBag.fail = false;
-            ViewBag.data = "";
+            ViewBag.hide = hide;
+
+            ViewBag.fail = fail;
+            ViewBag.data = data;
 
             List<SelectListItem> categoryList = new List<SelectListItem>();
             string[] categorys = _srtService.getCategoryList(dictionaryPath).ToArray();//get from dictionary
@@ -85,8 +87,11 @@ namespace FinalProject.Controllers
             {
                 ViewBag.fail = true;
                 ViewBag.isAuthenticated = true;
-                
-                return View(categoryList);
+
+                ViewBag.hide = true;
+
+                //return View(categoryList);
+                return RedirectToAction("CreateSRT", "Srt", new { isAuthenticated = true, ViewBag.fail, ViewBag.hide, ViewBag.data });
 
             }
             else
@@ -105,8 +110,11 @@ namespace FinalProject.Controllers
 
                 ViewBag.isAuthenticated = true;
 
+                ViewBag.hide = true;
+
                 ViewBag.data = "success";
-                return View(categoryList);
+                //return View(categoryList);
+                return RedirectToAction("CreateSRT", "Srt", new { isAuthenticated = true,  ViewBag.fail, ViewBag.hide, ViewBag.data });
 
             }
 
@@ -114,6 +122,7 @@ namespace FinalProject.Controllers
 
             //return View();
         }
+
 
         public string srtPath;
         public string text;
